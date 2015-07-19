@@ -43,3 +43,11 @@ group :development, :test do
   gem 'spring'
 end
 
+
+gem 'slim-rails'
+
+source 'https://rails-assets.org' do
+  gem 'rails-assets-bootstrap-sass-official'
+  gem 'rails-assets-font-awsome'
+end
+
