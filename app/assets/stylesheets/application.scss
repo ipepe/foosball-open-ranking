@@ -16,3 +16,30 @@
  */
 
 @import "bootstrap-sass-official";
+
+div.body-container{
+  padding: 2em 0em;
+}
+
+div.footer {
+  z-index: 1001;
+  background: #111;
+  color: #666;
+  text-align: center;
+  padding: 1em 0em;
+  font-size: 80%;
+  position:fixed;
+  bottom:0;
+  width:100%;
+}
+div.header{
+  z-index: 1001;
+  background: #111;
+  color: #666;
+  //text-align: center;
+  //padding: 1em 0em;
+  //font-size: 80%;
+  position:fixed;
+  top:0;
+  width:100%;
+}

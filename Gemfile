@@ -51,5 +51,6 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-font-awsome'
 end
 
+#rails-on-azure needs that
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
 
