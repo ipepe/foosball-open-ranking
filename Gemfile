@@ -45,6 +45,7 @@ end
 
 
 gem 'slim-rails'
+gem 'faker'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap-sass-official'
