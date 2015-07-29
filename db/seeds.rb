@@ -6,13 +6,12 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-red1 = Player.create!(nick: Faker::Name.first_name)
-red2 = Player.create!(nick: Faker::Name.first_name)
+10.times do Player.create!(nickname: Faker::Name.first_name) end
 
-blue1 = Player.create!(nick: Faker::Name.first_name)
-blue2 = Player.create!(nick: Faker::Name.first_name)
+(1..50).each do |i|
+  m1 = Match.create!(red_team_players: [Player.find(i%4+1), Player.find(i%4+2)], blue_team_players: [Player.find(i%4+3), Player.find(i%4+4)], red_team_score: i%3, blue_team_score: i+1%3)
+end
 
-m1 = Match.create!(reds: [red1, red2], blues: [blue1, blue2], red_score: 2, blue_score: 3)
 
 
 
