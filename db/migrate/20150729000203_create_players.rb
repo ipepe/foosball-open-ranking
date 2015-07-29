@@ -9,6 +9,7 @@ class CreatePlayers < ActiveRecord::Migration
     create_table :matches do |t|
       t.integer :red_team_score, null: false
       t.integer :blue_team_score, null: false
+      t.date :date
 
       t.timestamps null: false
     end
