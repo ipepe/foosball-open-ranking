@@ -45,11 +45,14 @@ end
 
 
 gem 'slim-rails'
+gem 'faker'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap-sass-official'
   gem 'rails-assets-font-awsome'
 end
 
+#rails-on-azure needs that
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
+gem "tiny_tds", '0.7.0'
 
