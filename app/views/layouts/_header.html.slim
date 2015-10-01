@@ -3,7 +3,9 @@
     div
       ul.nav.navbar-nav
         li: a(href="/") = I18n.t('link.main_index')
-        li: a(href="/players")
-          i(class="fa fa-search") = I18n.t('link.players_index')
-        li: a(href="/matches")
-          i(class="fa fa-arrows") = I18n.t('link.matches_index')
+        li: a(href="/players/new") = I18n.t('link.players_new')
+          i(class="fa fa-plus")
+        li: a(href="/players") = I18n.t('link.players_index')
+          i(class="fa fa-search")
+        li: a(href="/matches") = I18n.t('link.matches_index')
+          i(class="fa fa-arrows")
