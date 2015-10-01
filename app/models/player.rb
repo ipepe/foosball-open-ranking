@@ -9,4 +9,6 @@ class Player < ActiveRecord::Base
   has_many :blue_team_matches, through: :blue_player_match_participations, class_name: 'Match', source: 'match'
   has_many :red_team_players, through: :red_player_match_participations, class_name: 'Match', source: 'match'
 
+  scope :top10, -> { Player.all }
+
 end

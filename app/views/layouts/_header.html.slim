@@ -1,0 +1,9 @@
+.header
+  .navbar.navbar-default.container-fluid
+    div
+      ul.nav.navbar-nav
+        li: a(href="/") = I18n.t('link.main_index')
+        li: a(href="/players")
+          i(class="fa fa-search") = I18n.t('link.players_index')
+        li: a(href="/matches")
+          i(class="fa fa-arrows") = I18n.t('link.matches_index')

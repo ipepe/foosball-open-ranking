@@ -21,3 +21,21 @@
 
 en:
   hello: "Hello world"
+  application:
+    title: Foosball Open Ranking Platform
+
+  link:
+    main_index: Main page
+    players_index: Players
+    matches_index: Matches
+
+  main_index:
+    headers:
+      players: Top 5 players
+      matches: Last 5 matches
+    matches_table:
+      date: Date
+      red_team_score: Red score
+      blue_team_score: Blue score
+    players_table:
+      nickname: Nick

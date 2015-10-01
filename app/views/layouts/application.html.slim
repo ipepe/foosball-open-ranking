@@ -1,14 +1,12 @@
 doctype html
-html
+html lang=I18n.locale
   head
-    title RailsSlimBlogTutorial
+    title
+      == raw I18n.t 'application.title'
     == stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
-    == javascript_include_tag 'application', 'data-turbolinks-track' => true
     == csrf_meta_tags
   body
-    .header Jakas nawigacja?
-    .body-container
-      == yield
-    .footer
-      | &copy; 2015 Patryk "iPePe" Ptasiński. All Rights Reserved.
-      i.fa.fa-cog.fa-spin
+    == render 'layouts/header'
+    == yield
+    == render 'layouts/footer'
+    == javascript_include_tag 'application', 'data-turbolinks-track' => true

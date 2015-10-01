@@ -1,5 +1,11 @@
 class Match < ActiveRecord::Base
 
+  default_scope { order('date') }
+
+  validates :date, presence: true
+  validates :red_team_score, numericality: { only_integer: true, less_than_or_equal_to: 5, greater_than_or_equal_to: 0}, presence: true
+  validates :blue_team_score, numericality: { only_integer: true, less_than_or_equal_to: 5, greater_than_or_equal_to: 0}, presence: true
+
   has_many :player_match_participations
   has_many :players, through: :player_match_participations
 
