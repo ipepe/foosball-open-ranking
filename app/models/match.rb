@@ -19,6 +19,10 @@ class Match < ActiveRecord::Base
   has_many :blue_team_players, through: :blue_player_match_participations, class_name: 'Player', source: 'player'
   has_many :red_team_players, through: :red_player_match_participations, class_name: 'Player', source: 'player'
 
+  # slug
+  # def to_param
+  #   [id, red_team_players_nicks.map(&:parameterize).join("-"), blue_team_players_nicks.map(&:parameterize).join("-") ].join("-")
+  # end
 
   def red_team_players_nicks
     red_team_players.map &:nickname

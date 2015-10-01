@@ -93,7 +93,6 @@ GEM
       rails-assets-jquery (>= 1.9.0)
     rails-assets-font-awesome (4.4.0)
     rails-assets-jquery (2.1.4)
-    rails-assets-leaflet (0.7.5)
     railties (4.1.13)
       actionpack (= 4.1.13)
       activesupport (= 4.1.13)
@@ -165,7 +164,6 @@ DEPENDENCIES
   rails (= 4.1.13)
   rails-assets-bootstrap-sass-official!
   rails-assets-font-awesome!
-  rails-assets-leaflet!
   rake
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)

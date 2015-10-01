@@ -11,4 +11,10 @@ class Player < ActiveRecord::Base
 
   scope :top10, -> { Player.all }
 
+  # slug
+  # def to_param
+  #   [id, nickname.parameterize].join("-")
+  # end
+
+
 end

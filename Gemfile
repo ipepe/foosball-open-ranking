@@ -27,7 +27,6 @@ gem 'turbolinks'
 source 'http://rails-assets.org' do
   gem 'rails-assets-bootstrap-sass-official'
   gem 'rails-assets-font-awesome'
-  gem 'rails-assets-leaflet'
 end
 
 #development related assets
