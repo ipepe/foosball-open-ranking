@@ -107,7 +107,7 @@ IF EXIST "%DEPLOYMENT_TARGET%\Gemfile.lock" (
 PUSHD "%DEPLOYMENT_TARGET%"
 SET RAILS_ENV=production
 echo Precompiling assets in %cd%
-%JRUBY_HOME%\rake.bat assets:precompile
+%JRUBY_EXE% -S "%JRUBY_BUNDLER_CMD%" exec rake assets:precompile
 POPD
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
