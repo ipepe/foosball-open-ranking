@@ -2,6 +2,10 @@ class Match < ActiveRecord::Base
 
   default_scope { order('date') }
 
+  #validacja że score jedno nie może być równe drugiemu
+  #validacja że score musi być większe o 2 jeżeli uznać win?
+  #validacja że score nie mogą być obydwa 0
+
   validates :date, presence: true
   validates :red_team_score, numericality: { only_integer: true, less_than_or_equal_to: 5, greater_than_or_equal_to: 0}, presence: true
   validates :blue_team_score, numericality: { only_integer: true, less_than_or_equal_to: 5, greater_than_or_equal_to: 0}, presence: true
@@ -16,11 +20,12 @@ class Match < ActiveRecord::Base
   has_many :red_team_players, through: :red_player_match_participations, class_name: 'Player', source: 'player'
 
 
-  # def red_players=(values)
-  #   values.each do |v|
-  #     self.player_match_participations.build(match: self, player: v, team_color: :red)
-  #   end
-  # end
+  def red_team_players_nicks
+    red_team_players.map &:nickname
+  end
 
+  def blue_team_players_nicks
+    blue_team_players.map &:nickname
+  end
 end
 
