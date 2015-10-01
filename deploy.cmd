@@ -98,7 +98,6 @@ IF EXIST "%DEPLOYMENT_TARGET%\Gemfile.lock" (
 
   PUSHD "%DEPLOYMENT_TARGET%"
   
-  %JRUBY_EXE% -S gem uninstall rake
   %JRUBY_EXE% -S "%JRUBY_BUNDLER_CMD%" install --without development:test --path vendor/bundle --binstubs vendor/bundle/bin -j4 --deployment
   IF !ERRORLEVEL! NEQ 0 goto error
 
@@ -108,6 +107,7 @@ IF EXIST "%DEPLOYMENT_TARGET%\Gemfile.lock" (
 PUSHD "%DEPLOYMENT_TARGET%"
 SET RAILS_ENV=production
 echo Precompiling assets in %cd%
+%JRUBY_EXE% -S "%JRUBY_BUNDLER_CMD%" update rake
 %JRUBY_EXE% -S rake assets:precompile
 POPD
 
