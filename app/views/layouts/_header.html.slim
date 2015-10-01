@@ -3,11 +3,15 @@
     div
       ul.nav.navbar-nav
         li: a(href="/") = I18n.t('link.main_index')
-        li: a(href="/players/new") = I18n.t('link.players_new')
+        li: a(href="/players/new")
           i.fa.fa-plus
-        li: a(href="/matches/new") = I18n.t('link.matches_new')
+          span = I18n.t('link.players_new')
+        li: a(href="/matches/new")
           i.fa.fa-plus
-        li: a(href="/players") = I18n.t('link.players_index')
+          span = I18n.t('link.matches_new')
+        li: a(href="/players")
           i.fa.fa-search
-        li: a(href="/matches") = I18n.t('link.matches_index')
+          span = I18n.t('link.players_index')
+        li: a(href="/matches")
           i.fa.fa-arrows
+          span = I18n.t('link.matches_index')
