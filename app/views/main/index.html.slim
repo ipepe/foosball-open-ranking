@@ -14,7 +14,8 @@
       tbody
         - @matches.each do |match|
           tr
-            td = match.date.to_s
+            td
+              a(href="/matches/#{match.id}") = match.date.to_s
             td = match.red_team_players_nicks.join(", ")
             td = match.red_team_score
             td = ":"
@@ -31,5 +32,6 @@
       tbody
         - @players.each do |player|
           tr
-            td = player.nickname
+            td
+              a(href="/players/#{player.id}") = player.nickname
             td 1
