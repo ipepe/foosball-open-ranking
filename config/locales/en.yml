@@ -28,6 +28,8 @@ en:
     main_index: Main page
     players_index: Players
     matches_index: Matches
+    players_new: New player
+    matches_new: New match
 
   main_index:
     headers:

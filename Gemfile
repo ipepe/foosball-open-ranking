@@ -30,7 +30,9 @@ source 'http://rails-assets.org' do
   gem 'rails-assets-leaflet'
 end
 
+#development related assets
 gem 'faker'
+gem 'quiet_assets'
 
 group :development, :test do
   # gem 'byebug'

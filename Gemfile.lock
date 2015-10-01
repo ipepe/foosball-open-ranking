@@ -74,6 +74,8 @@ GEM
     non-stupid-digest-assets (1.0.5)
     puma (2.14.0)
     puma (2.14.0-java)
+    quiet_assets (1.1.0)
+      railties (>= 3.1, < 5.0)
     rack (1.5.5)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -159,6 +161,7 @@ DEPENDENCIES
   jquery-rails
   non-stupid-digest-assets
   puma
+  quiet_assets
   rails (= 4.1.13)
   rails-assets-bootstrap-sass-official!
   rails-assets-font-awesome!
