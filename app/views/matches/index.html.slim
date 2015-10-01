@@ -1,19 +1,6 @@
-h1 Listing matches
+.container-fluid
+  h1 Listing matches
 
-table
-  thead
-    tr
-      th
-      th
-      th
+  == render 'matches/table'
 
-  tbody
-    - @matches.each do |match|
-      tr
-        td = link_to 'Show', match
-        td = link_to 'Edit', edit_match_path(match)
-        td = link_to 'Destroy', match, data: {:confirm => 'Are you sure?'}, :method => :delete
-
-br
-
-= link_to 'New Match', new_match_path
+  = link_to 'New Match', new_match_path

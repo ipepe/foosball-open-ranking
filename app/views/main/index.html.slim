@@ -1,37 +1,7 @@
 .container-fluid
   div
     h1 = I18n.t('main_index.headers.matches')
-    table.table
-      thead
-        tr
-          th = I18n.t('main_index.matches_table.date')
-          th = I18n.t('main_index.matches_table.red_team_nicks')
-          th = I18n.t('main_index.matches_table.red_team_score')
-          th
-          th = I18n.t('main_index.matches_table.blue_team_score')
-          th = I18n.t('main_index.matches_table.blue_team_nicks')
-
-      tbody
-        - @matches.each do |match|
-          tr
-            td
-              a(href="/matches/#{match.id}") = match.date.to_s
-            td = match.red_team_players_nicks.join(", ")
-            td = match.red_team_score
-            td = ":"
-            td = match.blue_team_score
-            td = match.blue_team_players_nicks.join(", ")
+    == render 'matches/table'
   div
     h1 = I18n.t('main_index.headers.players')
-    table.table
-      thead
-        tr
-          th = I18n.t('main_index.players_table.nickname')
-          th Elo rank stub
-
-      tbody
-        - @players.each do |player|
-          tr
-            td
-              a(href="/players/#{player.id}") = player.nickname
-            td 1
+    == render 'players/table'
