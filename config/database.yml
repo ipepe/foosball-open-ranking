@@ -1,14 +1,23 @@
-default: &default
-  adapter: sqlite3
+
+default_azure_sql: &default_azure_sql
+  adapter: jdbcmssql
+  driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  username: azureuser@rub1aoq24g.database.windows.net
+  password: <%= ENV['SQLAZURECONNSTR_PASSWORD'] %>
+  url: 'jdbc:sqlserver://rub1aoq24g.database.windows.net;databaseName=foosballrank-production'
+
+default_sqlite: &default_sqlite
+  adapter: jdbcsqlite3
   pool: 5
   timeout: 5000
   database: db/<%= Rails.env %>.sqlite3
 
 development:
-  <<: *default
+  <<: *default_sqlite
 
 test:
-  <<: *default
+  <<: *default_sqlite
 
 production:
-  <<: *default
+  <<: *default_azure_sql
+
