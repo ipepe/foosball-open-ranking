@@ -71,6 +71,7 @@ GEM
     mime-types (2.6.2)
     minitest (5.8.1)
     multi_json (1.11.2)
+    non-stupid-digest-assets (1.0.5)
     puma (2.14.0)
     puma (2.14.0-java)
     rack (1.5.5)
@@ -90,6 +91,7 @@ GEM
       rails-assets-jquery (>= 1.9.0)
     rails-assets-font-awesome (4.4.0)
     rails-assets-jquery (2.1.4)
+    rails-assets-leaflet (0.7.5)
     railties (4.1.13)
       actionpack (= 4.1.13)
       activesupport (= 4.1.13)
@@ -151,13 +153,17 @@ DEPENDENCIES
   better_errors
   coffee-rails (~> 4.1.0)
   faker
+  i18n
   jbuilder (~> 2.0)
   jdbc-mssql-azure
   jquery-rails
+  non-stupid-digest-assets
   puma
   rails (= 4.1.13)
   rails-assets-bootstrap-sass-official!
   rails-assets-font-awesome!
+  rails-assets-leaflet!
+  rake
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   slim-rails

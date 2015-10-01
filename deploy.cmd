@@ -104,6 +104,12 @@ IF EXIST "%DEPLOYMENT_TARGET%\Gemfile.lock" (
   POPD
 )
 
+PUSHD "%DEPLOYMENT_TARGET%"
+SET RAILS_ENV=production
+echo Precompiling assets in %cd%
+%JRUBY_EXE% -S rake assets:precompile
+POPD
+
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :: Post deployment stub
