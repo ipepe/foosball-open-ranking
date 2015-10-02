@@ -3,9 +3,7 @@ table.table
     tr
       th = I18n.t('main_index.matches_table.date')
       th = I18n.t('main_index.matches_table.red_team_nicks')
-      th = I18n.t('main_index.matches_table.red_team_score')
-      th
-      th = I18n.t('main_index.matches_table.blue_team_score')
+      th style="text-align: center;" = "#{I18n.t('main_index.matches_table.red_team_score')}:#{I18n.t('main_index.matches_table.blue_team_score')}"
       th = I18n.t('main_index.matches_table.blue_team_nicks')
 
   tbody
@@ -14,7 +12,5 @@ table.table
         td
           a(href="/matches/#{match.id}") = match.date.to_s
         td = match.red_team_players_nicks.join(", ")
-        td = match.red_team_score
-        td = ":"
-        td = match.blue_team_score
+        td style="text-align: center;" = "#{match.red_team_score}:#{match.blue_team_score}"
         td = match.blue_team_players_nicks.join(", ")

@@ -19,10 +19,24 @@ class Match < ActiveRecord::Base
   has_many :blue_team_players, through: :blue_player_match_participations, class_name: 'Player', source: 'player'
   has_many :red_team_players, through: :red_player_match_participations, class_name: 'Player', source: 'player'
 
+  after_save :rerank_players
+
+  def can_be_ranked?
+    true#jakaś bardziej skomplikowana logika, np potwierdzenia graczy lub odpowiedni wynik
+  end
+
   # slug
   # def to_param
   #   [id, red_team_players_nicks.map(&:parameterize).join("-"), blue_team_players_nicks.map(&:parameterize).join("-") ].join("-")
   # end
+
+  def winners
+    if red_team_score > blue_team_score
+      red_team_players
+    else
+      blue_team_players
+    end
+  end
 
   def red_team_players_nicks
     red_team_players.map &:nickname
@@ -30,6 +44,23 @@ class Match < ActiveRecord::Base
 
   def blue_team_players_nicks
     blue_team_players.map &:nickname
+  end
+
+  private
+
+  def rerank_players
+    if !self.is_ranked && self.can_be_ranked?
+      puts "Im reranking players: #{players.map(&:id)}"
+      #nie można zmieniać ratingu podczas pracy algorytmu rankujacego wiec zapisujemy nowe ratingi a potem przypisujemy je playerom
+      new_ratings = self.players.map{|p| {id: p.id, rating: p.rank(self)} }
+      new_ratings.each do |hash|
+        player = Player.find(hash[:id].to_i)
+        player.rating = hash[:rating]
+        player.save!
+      end
+      self.is_ranked
+      self.save
+    end
   end
 end
 

@@ -2,6 +2,7 @@ class CreatePlayers < ActiveRecord::Migration
   def change
     create_table :players do |t|
       t.string :nickname, null: false, unique: true
+      t.integer :rating, null: false, default: 1500
 
       t.timestamps null: false
     end
@@ -9,6 +10,9 @@ class CreatePlayers < ActiveRecord::Migration
     create_table :matches do |t|
       t.integer :red_team_score, null: false
       t.integer :blue_team_score, null: false
+
+      t.boolean :is_ranked, null: false, default: false
+
       t.date :date
 
       t.timestamps null: false

@@ -13,15 +13,16 @@
 
 ActiveRecord::Schema.define(version: 20150729000203) do
 
-  create_table "matches", force: :cascade do |t|
-    t.integer  "red_team_score",  null: false
-    t.integer  "blue_team_score", null: false
+  create_table "matches", force: true do |t|
+    t.integer  "red_team_score",                  null: false
+    t.integer  "blue_team_score",                 null: false
+    t.boolean  "is_ranked",       default: false, null: false
     t.date     "date"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
 
-  create_table "player_match_participations", force: :cascade do |t|
+  create_table "player_match_participations", force: true do |t|
     t.integer  "player_id",  null: false
     t.integer  "match_id",   null: false
     t.integer  "team_color"
@@ -32,10 +33,11 @@ ActiveRecord::Schema.define(version: 20150729000203) do
   add_index "player_match_participations", ["match_id"], name: "index_player_match_participations_on_match_id"
   add_index "player_match_participations", ["player_id"], name: "index_player_match_participations_on_player_id"
 
-  create_table "players", force: :cascade do |t|
-    t.string   "nickname",   null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "players", force: true do |t|
+    t.string   "nickname",                  null: false
+    t.integer  "rating",     default: 1500, null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
 end

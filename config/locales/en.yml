@@ -41,5 +41,7 @@ en:
       red_team_nicks : Red players
       blue_team_nicks : Blue players
       blue_team_score: Blue score
-    players_table:
+  players:
+    table:
       nickname: Nick
+      rating: Gibbs rating
