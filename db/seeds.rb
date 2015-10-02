@@ -18,7 +18,7 @@ puts "Creating 50 matches"
   m1 = Match.create!(red_team_players: [Player.find(i%4+1), Player.find(i%4+2)], blue_team_players: [Player.find(i%4+3), Player.find(i%4+4)], red_team_score: i%3, blue_team_score: (i+1)%3, date: Date.today)
 end
 
-
+# Match.create!(red_team_players: [Player.find(4), Player.find(3)], blue_team_players: [Player.find(1), Player.find(2)], red_team_score: 3, blue_team_score: 0, date: Date.today)
 
 
 

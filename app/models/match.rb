@@ -7,6 +7,13 @@ class Match < ActiveRecord::Base
   #validacja że score nie mogą być obydwa 0
 
   validates :date, presence: true
+
+  validate do
+    if players.count != 4
+      errors.add :players, "Match should have 4 players instead it has #{players.count}"
+    end
+  end
+
   validates :red_team_score, numericality: { only_integer: true, less_than_or_equal_to: 5, greater_than_or_equal_to: 0}, presence: true
   validates :blue_team_score, numericality: { only_integer: true, less_than_or_equal_to: 5, greater_than_or_equal_to: 0}, presence: true
 
@@ -19,7 +26,7 @@ class Match < ActiveRecord::Base
   has_many :blue_team_players, through: :blue_player_match_participations, class_name: 'Player', source: 'player'
   has_many :red_team_players, through: :red_player_match_participations, class_name: 'Player', source: 'player'
 
-  after_save :rerank_players
+  # after_commit :rerank_players
 
   def can_be_ranked?
     true#jakaś bardziej skomplikowana logika, np potwierdzenia graczy lub odpowiedni wynik
@@ -59,8 +66,8 @@ class Match < ActiveRecord::Base
         player.save!
       end
       self.is_ranked
-      self.save
     end
+    true
   end
 end
 
