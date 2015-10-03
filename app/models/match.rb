@@ -59,11 +59,11 @@ class Match < ActiveRecord::Base
     self.reload
     if !self.is_ranked && self.can_be_ranked?
       # puts "Im reranking players: #{players.map(&:id)}"
-      #nie można zmieniać ratingu podczas pracy algorytmu rankujacego wiec zapisujemy nowe ratingi a potem przypisujemy je playerom
-      new_ratings = self.players.map{|p| {id: p.id, rating: p.rank(self)} }
-      new_ratings.each do |hash|
+      #nie można zmieniać rating_pointsu podczas pracy algorytmu rankujacego wiec zapisujemy nowe rating_pointsi a potem przypisujemy je playerom
+      new_rating_pointss = self.players.map{|p| {id: p.id, rating_points: p.rank(self)} }
+      new_rating_pointss.each do |hash|
         player = Player.find(hash[:id].to_i)
-        player.rating = hash[:rating]
+        player.rating_points = hash[:rating_points]
         player.save!
       end
       self.is_ranked

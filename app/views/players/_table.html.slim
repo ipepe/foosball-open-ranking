@@ -2,11 +2,11 @@ table.table
   thead
     tr
       th = I18n.t('players.table.nickname')
-      th = I18n.t('players.table.rating')
+      th = I18n.t('players.table.rating_points')
 
   tbody
     - @players.each do |player|
       tr
         td
           a(href="/players/#{player.id}") = player.nickname
-        td = player.rating
+        td = player.rating_points

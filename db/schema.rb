@@ -34,10 +34,10 @@ ActiveRecord::Schema.define(version: 20150729000203) do
   add_index "player_match_participations", ["player_id"], name: "index_player_match_participations_on_player_id"
 
   create_table "players", force: true do |t|
-    t.string   "nickname",                  null: false
-    t.integer  "rating",     default: 1500, null: false
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.string   "nickname",                     null: false
+    t.integer  "rating_points", default: 1500, null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
 end

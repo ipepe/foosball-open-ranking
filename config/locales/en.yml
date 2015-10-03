@@ -44,4 +44,4 @@ en:
   players:
     table:
       nickname: Nick
-      rating: Gibbs rating
+      rating_points: Gibbs rating_points

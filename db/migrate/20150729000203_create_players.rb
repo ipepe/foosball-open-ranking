@@ -2,7 +2,7 @@ class CreatePlayers < ActiveRecord::Migration
   def change
     create_table :players do |t|
       t.string :nickname, null: false, unique: true
-      t.integer :rating, null: false, default: 1500
+      t.integer :rating_points, null: false, default: 1500
 
       t.timestamps null: false
     end
