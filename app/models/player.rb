@@ -27,7 +27,7 @@ class Player < ActiveRecord::Base
     succes_rate = 500
     success_value = if match.winners.include?(self) then succes_rate else 0-succes_rate end # tu można wcisnąć przewagę puntkową jako większy lub mniejszy sukces
     rating_new = rating_old + k1 * (match_average_rating - rating_old + success_value * (1 - matches_count_limited / matches_count_limited_total ))
-    puts "Calculated new rating for #{self.nickname} is #{rating_new}"
+    # puts "Calculated new rating for #{self.nickname} is #{rating_new}"
     rating_new
   end
 
