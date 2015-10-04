@@ -1,23 +1,7 @@
-h1 Listing players
-
-table
-  thead
-    tr
-      th Nickname
-      th rating_points points
-      th
-      th
-      th
-
-  tbody
-    - @players.each do |player|
-      tr
-        td = player.nickname
-        td = player.rating_points
-        td = link_to 'Show', player
-        td = link_to 'Edit', edit_player_path(player)
-        td = link_to 'Destroy', player, data: {:confirm => 'Are you sure?'}, :method => :delete
-
-br
-
-= link_to 'New Player', new_player_path
+.container-fluid
+  h1 Listing players
+  div
+    a href="/players/new"
+      i.fa.fa-plus
+      span = I18n.t('link.players_new')
+  == render 'players/table'

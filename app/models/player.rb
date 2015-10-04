@@ -11,6 +11,10 @@ class Player < ActiveRecord::Base
 
   scope :top10, -> { Player.all }
 
+  def days_old
+    (Date.today - self.created_at.to_date).to_i
+  end
+
   # slug
   # def to_param
   #   [id, nickname.parameterize].join("-")

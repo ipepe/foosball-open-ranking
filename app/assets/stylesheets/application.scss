@@ -17,25 +17,24 @@
 
 @import "bootstrap-sass-official";
 
-div.footer {
-  z-index: 1001;
+$my-footer-size: 30px;
+
+html,
+body {
+  height: 100%;
+}
+
+#wrap {
+  min-height: 100%;
+  height: auto;
+  margin: 0 auto -$my-footer-size;
+  padding: 0 0 $my-footer-size;
+}
+
+#footer {
   background: #111;
   color: #666;
   text-align: center;
-  padding: 1em 0em;
   font-size: 80%;
-  position:fixed;
-  bottom:0;
-  width:100%;
+  height: $my-footer-size;
 }
-//div.header{
-//  z-index: 1001;
-//  background: #111;
-//  color: #666;
-//  //text-align: center;
-//  //padding: 1em 0em;
-//  //font-size: 80%;
-//  position:fixed;
-//  top:0;
-//  width:100%;
-//}

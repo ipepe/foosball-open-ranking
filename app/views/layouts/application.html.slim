@@ -8,6 +8,7 @@ html lang=I18n.locale
     == csrf_meta_tags
   body
     == render 'layouts/header'
-    == yield
+    #wrap
+      == yield
     == render 'layouts/footer'
     == javascript_include_tag 'application', 'data-turbolinks-track' => true

@@ -1,12 +1,13 @@
-p#notice = notice
+.container-fluid
+  p#notice = notice
 
-p
-  strong Nickname:
-  = @player.nickname
-p
-  strong rating_points points:
-  = @player.rating_points
+  p
+    strong Nickname:
+    = @player.nickname
+  p
+    strong rating_points points:
+    = @player.rating_points
 
-= link_to 'Edit', edit_player_path(@player)
-'|
-= link_to 'Back', players_path
+  = link_to 'Edit', edit_player_path(@player)
+  '|
+  = link_to 'Back', players_path

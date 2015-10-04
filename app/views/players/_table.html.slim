@@ -3,6 +3,7 @@ table.table
     tr
       th = I18n.t('players.table.nickname')
       th = I18n.t('players.table.rating_points')
+      th = I18n.t('players.table.days_old')
 
   tbody
     - @players.each do |player|
@@ -10,3 +11,4 @@ table.table
         td
           a(href="/players/#{player.id}") = player.nickname
         td = player.rating_points
+        td = "#{player.days_old}d"
