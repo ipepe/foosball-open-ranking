@@ -2,21 +2,6 @@ class Match < ActiveRecord::Base
 
   default_scope { order('date') }
 
-  #validacja że score jedno nie może być równe drugiemu
-  #validacja że score musi być większe o 2 jeżeli uznać win?
-  #validacja że score nie mogą być obydwa 0
-
-  validates :date, presence: true
-
-  # validate do
-  #   if players.count != 4
-  #     errors.add :players, "Match should have 4 players instead it has #{players.count}"
-  #   end
-  # end
-
-  validates :red_team_score, numericality: { only_integer: true, less_than_or_equal_to: 5, greater_than_or_equal_to: 0}, presence: true
-  validates :blue_team_score, numericality: { only_integer: true, less_than_or_equal_to: 5, greater_than_or_equal_to: 0}, presence: true
-
   has_many :player_match_participations
   has_many :players, through: :player_match_participations
 
@@ -25,6 +10,24 @@ class Match < ActiveRecord::Base
 
   has_many :blue_team_players, through: :blue_player_match_participations, class_name: 'Player', source: 'player'
   has_many :red_team_players, through: :red_player_match_participations, class_name: 'Player', source: 'player'
+
+  validates :date, presence: true
+
+  validate do
+    if red_team_score == blue_team_score
+      errors.add :red_team_score, "Score can't be even"
+      errors.add :blue_team_score, "Score can't be even"
+    end
+  end
+
+  validate do
+    unless players.present? || blue_team_players.present? || red_team_players.present?
+      errors.add :players, "Match should have some players instead it has #{players.count}"
+    end
+  end
+
+  validates :blue_team_score, numericality: { only_integer: true, less_than_or_equal_to: 5, greater_than_or_equal_to: 0}, presence: true
+  validates :red_team_score, numericality: { only_integer: true, less_than_or_equal_to: 5, greater_than_or_equal_to: 0}, presence: true
 
   after_commit :rerank_players
 
