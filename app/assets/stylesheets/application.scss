@@ -27,3 +27,8 @@
 .glyphicon{
   padding: 3px;
 }
+
+body, .container, .container-fluid{
+  max-width: 100vw;
+  word-wrap: break-word;
+}
