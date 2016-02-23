@@ -1,14 +1,27 @@
 doctype html
 html lang=I18n.locale
   head
+    title WebsiteName
     link(rel="shortcut icon" href="/icon.png")
-    title
-      == raw I18n.t 'application.title'
+    meta charset="utf-8"
     == stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    == javascript_include_tag 'application', 'data-turbolinks-track' => true
+    /== include_gon
     == csrf_meta_tags
+
   body
     == render 'layouts/header'
-    #wrap
+    .container-fluid
+      - if [notice,alert].any?(&:present?)
+        .container
+          - if alert.present?
+            h4.alert.alert-danger.alert-dismissible role="alert"
+              button.close aria-label="Close" data-dismiss="alert" type="button"
+                span aria-hidden="true"  &times;
+              = alert
+          - if notice.present?
+            h4.alert.alert-info.alert-dismissible role="alert"
+              button.close aria-label="Close" data-dismiss="alert" type="button"
+                span aria-hidden="true"  &times;
+              = notice
       == yield
-    == render 'layouts/footer'
-    == javascript_include_tag 'application', 'data-turbolinks-track' => true

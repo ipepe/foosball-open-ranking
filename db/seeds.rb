@@ -20,5 +20,4 @@ end
 
 # Match.create!(red_team_players: [Player.find(4), Player.find(3)], blue_team_players: [Player.find(1), Player.find(2)], red_team_score: 3, blue_team_score: 0, date: Date.today)
 
-
-
+User.create!(email: "pl@pl.pl", password: "Password1", password_confirmation: "Password1")

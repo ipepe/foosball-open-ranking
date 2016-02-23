@@ -2,39 +2,28 @@
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
  *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ * Any CSS and SCSS file within this directory, lib/assets/bootstrap-sass-official/assets/fonts/bootstrap/stylesheets, vendor/assets/bootstrap-sass-official/assets/fonts/bootstrap/stylesheets,
+ * or vendor/assets/bootstrap-sass-official/assets/fonts/bootstrap/stylesheets of plugins, if any, can be referenced here using a relative path.
  *
  * You're free to add application-wide styles to this file and they'll appear at the bottom of the
  * compiled file so the styles you add here take precedence over styles defined in any styles
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require 'font-awesome'
  *= require_tree .
  *= require_self
  */
-
 @import "bootstrap-sass-official";
-
-$my-footer-size: 30px;
-
-html,
-body {
-  height: 100%;
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('/assets/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.eot');
+  src: url('/assets/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('/assets/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.woff') format('woff'), url('/assets/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.ttf') format('truetype'), url('/assets/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
 
-#wrap {
-  min-height: 100%;
-  height: auto;
-  margin: 0 auto -$my-footer-size;
-  padding: 0 0 $my-footer-size;
+.navbar{
+  border-radius: 0px;
 }
 
-#footer {
-  background: #111;
-  color: #666;
-  text-align: center;
-  font-size: 80%;
-  height: $my-footer-size;
+.glyphicon{
+  padding: 3px;
 }

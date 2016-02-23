@@ -1,46 +1,63 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.1.13'
-gem 'rake'
-gem 'i18n'
-gem 'sdoc', '~> 0.4.0',          group: :doc
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :jruby]
-gem 'puma'
-
-#Database related gems
-gem 'activerecord-jdbcsqlite3-adapter'
-gem "activerecord-jdbc-adapter"
-gem "activerecord-jdbcmssql-adapter"
-gem "jdbc-mssql-azure"
-gem 'will_paginate', '~> 3.0.7'
-
-#frontend related gems
-gem "non-stupid-digest-assets"
-gem 'jbuilder', '~> 2.0'
-gem 'slim-rails'
-gem 'sass-rails', '~> 5.0'
-gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.1.0'
-gem 'jquery-rails'
-gem 'turbolinks'
-
-source 'http://rails-assets.org' do
-  gem 'rails-assets-bootstrap-sass-official'
-  gem 'rails-assets-font-awesome'
-end
-
-#development related assets
-gem 'faker'
-gem 'quiet_assets'
+gem 'rails', '4.1.14.1'
+gem 'rake', '= 0.9.6'
+gem 'rack', '= 1.5.2'
 
 group :development, :test do
-  # gem 'byebug'
-  # gem 'web-console', '~> 2.0'
-
+  gem 'sqlite3'
+  gem 'minitest'
+  gem 'thor'
+  gem 'faker'
   gem "better_errors"
-  gem 'spring'
 end
 
+group :production, :mysql do
+  gem 'mysql2', '~> 0.3.20' #version >= 4.0.0 is not compatible with this rails version
+end
 
+group :production, :postgresql do
+  gem 'pg'
+end
+
+# classic gems
+gem 'sass-rails', '~> 4.0.5'
+gem 'uglifier', '>= 1.3.0'
+gem 'coffee-rails', '~> 4.0.0'
+gem 'jquery-rails'
+gem 'turbolinks'
+gem 'jbuilder', '~> 2.0'
+gem 'sdoc', '~> 0.4.0',          group: :doc
+gem 'spring',                    group: :development
+
+# assets pipeline
+source 'https://rails-assets.org' do
+  gem 'rails-assets-bootstrap-sass-official'
+end
+
+# project related gems
+gem 'dotenv-rails'
+gem 'puma'
+gem 'slim-rails'
+gem 'will_paginate'
+
+gem 'non-stupid-digest-assets'
+gem 'quiet_assets'
+
+# gem 'faker'
+#
+# gem 'geocoder'
+# gem 'maxminddb'
+#
+# gem 'gon'
+
+# gem 'rolify'
+# gem 'cancancan'
+
+#devise
+gem 'devise'
+gem 'omniauth'
+# gem 'omniauth-facebook'
+gem "omniauth-google-oauth2"
 
 

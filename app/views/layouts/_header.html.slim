@@ -1,17 +1,46 @@
-#header
-  .navbar.navbar-default.container-fluid
-    div
+nav.navbar.navbar-inverse
+  .container-fluid
+    .navbar-header
+      a.navbar-brand href="/"  WebSiteName
+    - if current_user.present?
       ul.nav.navbar-nav
-        li: a(href="/") = I18n.t('link.main_index')
-        li: a(href="/players/new")
-          i.fa.fa-plus
-          span = I18n.t('link.players_new')
-        li: a(href="/matches/new")
-          i.fa.fa-plus
-          span = I18n.t('link.matches_new')
-        li: a(href="/players")
-          i.fa.fa-search
-          span = I18n.t('link.players_index')
-        li: a(href="/matches")
-          i.fa.fa-arrows
-          span = I18n.t('link.matches_index')
+        li.active
+          a href="/"  Home
+        li
+          a href="#"  Page 1
+        li
+          a href="#"  Page 2
+        li
+          a href="#"  Page 3
+    ul.nav.navbar-nav.navbar-right
+      - if current_user.present?
+        li
+          a href="/users/sign_out"
+            span.glyphicon.glyphicon-log-out
+            | Logout
+      - else
+        li
+          a href="/users/sign_up"
+            span.glyphicon.glyphicon-user
+            | Sign Up
+        li
+          a href="/users/sign_in"
+            span.glyphicon.glyphicon-log-in
+            | Login
+/#header
+/  .navbar.navbar-default.container-fluid
+/    div
+/      ul.nav.navbar-nav
+/        li: a(href="/") = I18n.t('link.main_index')
+/        li: a(href="/players/new")
+/          i.fa.fa-plus
+/          span = I18n.t('link.players_new')
+/        li: a(href="/matches/new")
+/          i.fa.fa-plus
+/          span = I18n.t('link.matches_new')
+/        li: a(href="/players")
+/          i.fa.fa-search
+/          span = I18n.t('link.players_index')
+/        li: a(href="/matches")
+/          i.fa.fa-arrows
+/          span = I18n.t('link.matches_index')
