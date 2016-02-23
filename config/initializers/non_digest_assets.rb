@@ -1,1 +1,0 @@
-NonStupidDigestAssets.whitelist += [/\.(?i:)(?:svg|eot|woff|ttf|otf)$/]
