@@ -25,9 +25,9 @@ class Match < ActiveRecord::Base
 
   validate do
     if red_team_score > blue_team_score
-      errors.add :red_team_score if (red_team_score - blue_team_score) < 3
+      errors.add :red_team_score if red_team_score < 3
     else
-      errors.add :blue_team_score if (blue_team_score - red_team_score) < 3
+      errors.add :blue_team_score if blue_team_score < 3
     end
   end
 
@@ -56,8 +56,8 @@ class Match < ActiveRecord::Base
     end
   end
 
-  validates :blue_team_score, numericality: { only_integer: true, less_than_or_equal_to: 5, greater_than_or_equal_to: 0}, presence: true
-  validates :red_team_score, numericality: { only_integer: true, less_than_or_equal_to: 5, greater_than_or_equal_to: 0}, presence: true
+  validates :blue_team_score, numericality: { only_integer: true, less_than_or_equal_to: 3, greater_than_or_equal_to: 0}, presence: true
+  validates :red_team_score, numericality: { only_integer: true, less_than_or_equal_to: 3, greater_than_or_equal_to: 0}, presence: true
 
   after_commit :rerank_players
 
