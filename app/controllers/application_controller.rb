@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   #   before_action :authenticate_user!
   # else
   #   def current_user
-  #     User.new(email: 'patryk.ptasinski@in4mates.com')
+  #     User.find_or_create_by!(email: 'patryk.ptasinski@in4mates.com', first_name: 'Patryk', last_name: 'Ptasinski')
   #   end
   # end
 end

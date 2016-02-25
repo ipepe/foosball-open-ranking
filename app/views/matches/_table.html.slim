@@ -6,6 +6,7 @@ table.table
       th style="text-align: center;"
         = "#{I18n.t('activerecord.attributes.match.red_team_score')}:#{I18n.t('activerecord.attributes.match.blue_team_score')}"
       th = I18n.t('activerecord.attributes.match.blue_team_nicknames')
+      th = I18n.t('activerecord.attributes.match.ranked')
 
   tbody
     - @matches.each do |match|
@@ -18,3 +19,8 @@ table.table
           | :
           b style="color: #2980b9;" = match.blue_team_score
         td style="color: #2980b9;" = match.blue_team_players_nicknames.join(", ")
+        td = match.can_be_ranked?
+        td
+          - if match.can_be_confirmed?(current_user)
+            = link_to 'Confirm!', { :action=>"update", :controller=>"matches",
+                    :id=>match.id, match:{ confirmed_by_id: 1 } }, method: :put

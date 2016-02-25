@@ -14,7 +14,7 @@ class MatchesController < ApplicationController
 
   # GET /matches/new
   def new
-    @match = Match.new
+    @match = Match.new(red_team_player_one: current_user.players.first)
   end
 
   # GET /matches/1/edit
@@ -24,7 +24,7 @@ class MatchesController < ApplicationController
   # POST /matches
   # POST /matches.json
   def create
-    @match = Match.new(match_params)
+    @match = Match.new(match_params.merge(created_by: current_user))
 
     respond_to do |format|
       if @match.save
@@ -72,7 +72,11 @@ class MatchesController < ApplicationController
       params[:match].permit(:red_team_score,
                             :blue_team_score,
                             :date,
-                            red_team_players_attributes: [:id],
-                            blue_team_players_attributes: [:id])
+                            :red_team_player_one_id,
+                            :red_team_player_two_id,
+                            :blue_team_player_one_id,
+                            :blue_team_player_two_id,
+                            :confirmed_by_id
+      )
     end
 end

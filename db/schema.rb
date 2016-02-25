@@ -14,25 +14,19 @@
 ActiveRecord::Schema.define(version: 20160209000203) do
 
   create_table "matches", force: true do |t|
-    t.integer  "red_team_score",  default: 0, null: false
-    t.integer  "blue_team_score", default: 0, null: false
+    t.integer  "red_team_score",          default: 0, null: false
+    t.integer  "blue_team_score",         default: 0, null: false
+    t.integer  "created_by_id",                       null: false
+    t.integer  "confirmed_by_id"
+    t.datetime "confirmed_at"
+    t.integer  "red_team_player_one_id",              null: false
+    t.integer  "red_team_player_two_id",              null: false
+    t.integer  "blue_team_player_one_id",             null: false
+    t.integer  "blue_team_player_two_id",             null: false
     t.date     "date"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
   end
-
-  create_table "player_match_participations", force: true do |t|
-    t.integer  "player_id",                  null: false
-    t.integer  "match_id",                   null: false
-    t.boolean  "confirmed",  default: false, null: false
-    t.integer  "team_color"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-  end
-
-  add_index "player_match_participations", ["match_id"], name: "index_player_match_participations_on_match_id"
-  add_index "player_match_participations", ["player_id", "match_id"], name: "index_player_match_participations_on_player_id_and_match_id", unique: true
-  add_index "player_match_participations", ["player_id"], name: "index_player_match_participations_on_player_id"
 
   create_table "players", force: true do |t|
     t.string   "nickname",                     null: false

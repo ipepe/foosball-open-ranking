@@ -13,22 +13,18 @@ class CreatePlayers < ActiveRecord::Migration
       t.integer :red_team_score, null: false, default: 0
       t.integer :blue_team_score, null: false, default: 0
 
+      t.integer  :created_by_id, foreign_key: true, null: false
+      t.integer  :confirmed_by_id, foreign_key: true
+      t.datetime :confirmed_at, foreign_key: true
+
+      t.integer :red_team_player_one_id,  foreign_key: true, null: false
+      t.integer :red_team_player_two_id,  foreign_key: true, null: false
+      t.integer :blue_team_player_one_id, foreign_key: true, null: false
+      t.integer :blue_team_player_two_id, foreign_key: true, null: false
+
       t.date :date
 
       t.timestamps null: false
     end
-
-    create_table :player_match_participations do |t|
-      t.belongs_to :player, index: true, null: false
-      t.belongs_to :match, index: true, null: false
-
-      t.boolean :confirmed, default: false, null: false
-
-      t.integer :team_color
-
-      t.timestamps null: false
-    end
-
-    add_index :player_match_participations, [:player_id, :match_id], unique: true
   end
 end

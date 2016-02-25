@@ -1,14 +1,6 @@
 class Player < ActiveRecord::Base
 
   belongs_to :user
-  has_many :player_match_participations
-  has_many :matches, through: :player_match_participations
-
-  has_many :blue_player_match_participations, -> { blue }, class_name: 'PlayerMatchParticipation'
-  has_many :red_player_match_participations, -> { red }, class_name: 'PlayerMatchParticipation'
-
-  has_many :blue_team_matches, through: :blue_player_match_participations, class_name: 'Match', source: 'match'
-  has_many :red_team_players, through: :red_player_match_participations, class_name: 'Match', source: 'match'
 
   scope :top10, -> { Player.all }
 
@@ -25,6 +17,10 @@ class Player < ActiveRecord::Base
     all.map{|p| [p.nickname, p.id] }
   end
 
+  def matches
+    Match.where('red_team_player_one_id = :myid OR red_team_player_two_id = :myid OR blue_team_player_one_id = :myid OR blue_team_player_two_id = :myid', myid: self.id)
+  end
+
   def days_old
     (Date.today - self.created_at.to_date).to_i
   end
@@ -38,7 +34,11 @@ class Player < ActiveRecord::Base
   def rank(match)
     matches_limit = 25 #after this count of matches, we can assume accurate rating_points of player
     matches_count_limited = if self.matches.count < matches_limit then self.matches.count else matches_limit end
-    matches_count_limited_total = match.players.map{|p| p.matches.count}.map{|match_count| if match_count < matches_limit then match_count else matches_limit end}.inject(&:+)
+    matches_count_limited_total = match.players.map do |p|
+      puts "test"
+      p.matches.count
+    end
+    matches_count_limited_total = matches_count_limited_total.map{|match_count| if match_count < matches_limit then match_count else matches_limit end}.inject(&:+)
     match_average_rating_points = match.players.map{|p| p.rating_points*(if p.matches.count < matches_limit then p.matches.count else matches_limit end)}.inject{|sum,x| sum + x }/matches_count_limited_total
     rating_points_old = self.rating_points
     k1 = 0.12 #Affects the maximum amount of RP that can be gained/lost in a single game.

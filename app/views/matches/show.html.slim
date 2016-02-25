@@ -1,7 +1,28 @@
 .container-fluid
-  p#notice = notice
-
-
+  p Date: #{@match.date}
+  table.table
+    colgroup
+      col style="background-color:#c0392b;"
+      col style="background-color:#2980b9;"
+    thead
+      tr
+        th = I18n.t('activerecord.attributes.match.red_team')
+        th = I18n.t('activerecord.attributes.match.blue_team')
+    tbody
+      tr
+        td = @match.red_team_player_one.nickname
+        td = @match.blue_team_player_one.nickname
+      tr
+        td = @match.red_team_player_two.nickname
+        td = @match.blue_team_player_two.nickname
+      tr
+        td = @match.red_team_score
+        td = @match.blue_team_score
+br
+  - if @match.can_be_confirmed?(current_user)
+    = link_to 'Confirm!', { :action=>"update", :controller=>"matches",
+            :id=>@match.id, match:{ confirmed_by_id: 1 } }, method: :put
+    '|
   = link_to 'Edit', edit_match_path(@match)
   '|
   = link_to 'Back', matches_path

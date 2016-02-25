@@ -2,16 +2,34 @@ class Match < ActiveRecord::Base
 
   default_scope { order('date') }
 
-  has_many :player_match_participations
-  has_many :players, through: :player_match_participations
+  belongs_to :red_team_player_one,  class_name: 'Player'
+  belongs_to :red_team_player_two,  class_name: 'Player'
+  belongs_to :blue_team_player_one, class_name: 'Player'
+  belongs_to :blue_team_player_two, class_name: 'Player'
 
-  has_many :blue_player_match_participations, -> { blue }, class_name: 'PlayerMatchParticipation'
-  has_many :red_player_match_participations, -> { red }, class_name: 'PlayerMatchParticipation'
+  belongs_to :created_by,   class_name: 'User'
+  belongs_to :confirmed_by, class_name: 'User'
 
-  has_many :blue_team_players, through: :blue_player_match_participations, class_name: 'Player', source: 'player'
-  has_many :red_team_players, through: :red_player_match_participations, class_name: 'Player', source: 'player'
+  validates :date, :created_by_id, presence: true
+  validates :confirmed_at, presence: true, if: 'confirmed_by_id.present?'
 
-  validates :date, presence: true
+  before_validation do
+    if confirmed_by_id_changed?
+      self.confirmed_at = DateTime.now
+    end
+  end
+
+  validate do
+    errors.add :confirmed_by if self.confirmed_by.present? && !self.can_be_confirmed?(self.confirmed_by)
+  end
+
+  validate do
+    if red_team_score > blue_team_score
+      errors.add :red_team_score if (red_team_score - blue_team_score) < 3
+    else
+      errors.add :blue_team_score if (blue_team_score - red_team_score) < 3
+    end
+  end
 
   validate do
     if self.can_be_ranked? && red_team_score.to_i == blue_team_score.to_i
@@ -21,20 +39,20 @@ class Match < ActiveRecord::Base
   end
 
   validate do
-    if self.player_match_participations.confirmed.exists?
-      errors.add :confirmed, "Match can't be changed when confirmed by at least one player"
+    if self.confirmed_by_id.present? && !confirmed_by_id_changed?
+      errors.add :base, "Match can't be changed when confirmed by at least one player"
     end
   end
 
   validate do
-    if (arr = [players.to_a, red_team_players.to_a, blue_team_players.to_a].flatten.map(&:id).uniq).size < 4
+    if self.can_be_ranked? && (arr = players.flatten.map(&:id).uniq).size < 4
       errors.add :players, "Match should have some players instead it has #{arr.size}"
     end
   end
 
   validate do
-    unless players.present? || blue_team_players.present? || red_team_players.present?
-      errors.add :players, "Match should have some players instead it has #{players.count}"
+    unless players.present?
+      errors.add :players, "Match should have at least some players instead it has #{players.size}"
     end
   end
 
@@ -43,16 +61,50 @@ class Match < ActiveRecord::Base
 
   after_commit :rerank_players
 
-  accepts_nested_attributes_for :red_team_players, :blue_team_players
-
-  def can_be_ranked?
-    blue_player_match_participations.confirmed.exists? && red_player_match_participations.confirmed.exists?
+  def players
+    [red_team_players, blue_team_players].flatten
   end
 
-  # slug
-  # def to_param
-  #   [id, red_team_players_nicks.map(&:parameterize).join("-"), blue_team_players_nicks.map(&:parameterize).join("-") ].join("-")
-  # end
+  def red_team_players
+    [red_team_player_one, red_team_player_two]
+  end
+
+  def blue_team_players
+    [blue_team_player_one, blue_team_player_two]
+  end
+
+  def can_be_ranked?
+    is_confirmed?
+  end
+
+  def is_confirmed?
+    self.confirmed_by_id.present? && self.created_by_id.present?
+  end
+
+  def created_by_team
+    if (self.created_by.players.to_a & self.blue_team_players).size > 0
+      :blue
+    elsif (self.created_by.players.to_a & self.red_team_players).size > 0
+      :red
+    else
+      :none
+    end
+  end
+
+  def can_confirm_players
+    if created_by_team == :red
+      self.red_team_players
+    elsif created_by_team == :blue
+      self.blue_team_players
+    else
+      self.players
+    end
+  end
+
+  def can_be_confirmed?(user)
+    return false if self.can_be_ranked?
+    user.present? && user.players.where(id: can_confirm_players.map(&:id)).exists?
+  end
 
   def winners
     if red_team_score > blue_team_score
@@ -70,20 +122,19 @@ class Match < ActiveRecord::Base
     blue_team_players.map &:nickname
   end
 
-  private
+  # private
 
   def rerank_players
-    self.reload
-    if !self.is_ranked && self.can_be_ranked?
+    if self.can_be_ranked?
+      self.reload
       # puts "Im reranking players: #{players.map(&:id)}"
       #nie można zmieniać rating_pointsu podczas pracy algorytmu rankujacego wiec zapisujemy nowe rating_pointsi a potem przypisujemy je playerom
-      new_rating_pointss = self.players.map{|p| {id: p.id, rating_points: p.rank(self)} }
-      new_rating_pointss.each do |hash|
+      new_rating_points = self.players.flatten.map{|p| {id: p.id, rating_points: p.rank(self)} }
+      new_rating_points.each do |hash|
         player = Player.find(hash[:id].to_i)
         player.rating_points = hash[:rating_points]
         player.save!
       end
-      self.is_ranked
     end
     true
   end

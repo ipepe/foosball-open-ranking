@@ -22,18 +22,14 @@
         th = I18n.t('activerecord.attributes.match.blue_team')
     tbody
       tr
-        td = select('match[red_team_players_attributes][0]', "id", Player.select_collection, selected: @match.red_team_players.first.try(:id) )
-        td = select('match[blue_team_players_attributes][0]', "id", Player.select_collection, selected: @match.blue_team_players.first.try(:id) )
+        td = f.collection_select(:red_team_player_one_id, Player.all, :id, :nickname, include_blank: true)
+        td = f.collection_select(:blue_team_player_one_id, Player.all, :id, :nickname, include_blank: true)
       tr
-        td = select('match[red_team_players_attributes][1]', "id", Player.select_collection, selected: @match.red_team_players.second.try(:id) )
-        td = select('match[blue_team_players_attributes][1]', "id", Player.select_collection, selected: @match.blue_team_players.second.try(:id) )
+        td = f.collection_select(:red_team_player_two_id, Player.all, :id, :nickname, include_blank: true)
+        td = f.collection_select(:blue_team_player_two_id, Player.all, :id, :nickname, include_blank: true)
       tr
         td.form-group
           = f.number_field :red_team_score, class: 'form-control'
         td.form-group
           = f.number_field :blue_team_score, class: 'form-control'
-
-  /.form-group
-  /  = f.label :nickname
-  /  = f.text_field :nickname, class:"form-control"
   .actions = f.submit
