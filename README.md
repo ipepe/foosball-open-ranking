@@ -13,3 +13,13 @@ Website is hosted here:
 ```bash
 git remote add os ssh://56cece0b7628e14d28000107@foos-ipepe.rhcloud.com/~/git/foos.git/
 ```
+
+## List envs 
+```bash
+rhc env list -a foos
+```
+
+## Add env
+```
+rhc env set GOOGLE_SECRET_KEY=testkey -a foos
+```
