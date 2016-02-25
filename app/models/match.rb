@@ -93,9 +93,9 @@ class Match < ActiveRecord::Base
 
   def can_confirm_players
     if created_by_team == :red
-      self.red_team_players
-    elsif created_by_team == :blue
       self.blue_team_players
+    elsif created_by_team == :blue
+      self.red_team_players
     else
       self.players
     end
