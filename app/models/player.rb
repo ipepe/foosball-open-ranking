@@ -25,6 +25,14 @@ class Player < ActiveRecord::Base
     (Date.today - self.created_at.to_date).to_i
   end
 
+  def can_attach?
+    self.user_id.blank?
+  end
+
+  def can_dettach?(user)
+    self.user_id == user.id
+  end
+
   # slug
   # def to_param
   #   [id, nickname.parameterize].join("-")

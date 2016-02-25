@@ -5,6 +5,8 @@ table.table
       th = I18n.t('activerecord.attributes.player.nickname')
       th = I18n.t('activerecord.attributes.player.rating_points')
       th = I18n.t('activerecord.attributes.player.days_old')
+      th = I18n.t('activerecord.attributes.player.attach')
+      th = I18n.t('activerecord.attributes.player.dettach')
   tbody
     - @players.each do |player|
       tr
@@ -14,3 +16,11 @@ table.table
         td = link_to player.nickname, player_path(player)
         td = player.rating_points
         td = "#{player.days_old}d"
+        td
+          - if player.can_attach?
+            = link_to 'Attach!', {:action => "update", :controller => "players",
+                    :id =>player.id, player: {user_id: current_user.id}}, method: :put
+        td
+          - if player.can_dettach?(current_user)
+            = link_to 'Dettach!', {:action => "update", :controller => "players",
+                    :id =>player.id, player: {user_id: nil}}, method: :put
