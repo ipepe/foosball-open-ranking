@@ -102,7 +102,7 @@ class Match < ActiveRecord::Base
   end
 
   def can_be_confirmed?(user)
-    return false if self.can_be_ranked?
+    return false if self.is_confirmed? && !confirmed_by_id_changed?
     user.present? && user.players.where(id: can_confirm_players.map(&:id)).exists?
   end
 
