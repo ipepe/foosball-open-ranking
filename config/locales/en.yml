@@ -35,6 +35,7 @@ en:
         red_team: Red team
         blue_team: Blue team
         ranked: Ranked
+        confirm: Confirm
       player:
         nickname: Nickname
         rating_points: Rating points
