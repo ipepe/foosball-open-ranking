@@ -1,6 +1,6 @@
 class Match < ActiveRecord::Base
 
-  default_scope { order('date') }
+  default_scope { order(created_at: :desc) }
 
   belongs_to :red_team_player_one,  class_name: 'Player'
   belongs_to :red_team_player_two,  class_name: 'Player'

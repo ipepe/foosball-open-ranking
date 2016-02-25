@@ -1,5 +1,7 @@
 class Player < ActiveRecord::Base
 
+  default_scope { order(rating_points: :desc) }
+
   belongs_to :user
 
   scope :top10, -> { Player.all }
