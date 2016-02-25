@@ -1,0 +1,5 @@
+center
+  h1 = I18n.t('links.devise.login')
+  - resource_class.omniauth_providers.each do |provider|
+    = link_to omniauth_authorize_path(resource_name, provider)
+      img src="/sign-in-with-google.png"

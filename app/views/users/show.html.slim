@@ -1,0 +1,16 @@
+.container-fluid
+  p
+    strong Label:
+    = @user.label
+
+  h3 Players
+  table.table
+    thead
+      tr
+        th = I18n.t('activerecord.attributes.player.nickname')
+        th = I18n.t('activerecord.attributes.player.rating_points')
+    tbody
+      - @user.players.each do |player|
+        tr
+          td = player.nickname
+          td = player.rating_points

@@ -11,6 +11,7 @@
  * file per style scope.
  *
  *= require_tree .
+ *= require 'bootstrap-datepicker'
  *= require_self
  */
 @import "bootstrap-sass-official";
@@ -31,4 +32,8 @@
 body, .container, .container-fluid{
   max-width: 100vw;
   word-wrap: break-word;
+}
+
+.inline{
+  display: inline-block;
 }

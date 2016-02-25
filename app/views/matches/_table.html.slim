@@ -1,16 +1,20 @@
 table.table
   thead
     tr
-      th = I18n.t('main_index.matches_table.date')
-      th = I18n.t('main_index.matches_table.red_team_nicks')
-      th style="text-align: center;" = "#{I18n.t('main_index.matches_table.red_team_score')}:#{I18n.t('main_index.matches_table.blue_team_score')}"
-      th = I18n.t('main_index.matches_table.blue_team_nicks')
+      th = I18n.t('activerecord.attributes.match.date')
+      th = I18n.t('activerecord.attributes.match.red_team_nicknames')
+      th style="text-align: center;"
+        = "#{I18n.t('activerecord.attributes.match.red_team_score')}:#{I18n.t('activerecord.attributes.match.blue_team_score')}"
+      th = I18n.t('activerecord.attributes.match.blue_team_nicknames')
 
   tbody
     - @matches.each do |match|
       tr
         td
           a(href="/matches/#{match.id}") = match.date.to_s
-        td = match.red_team_players_nicks.join(", ")
-        td style="text-align: center;" = "#{match.red_team_score}:#{match.blue_team_score}"
-        td = match.blue_team_players_nicks.join(", ")
+        td style="color: #c0392b;" = match.red_team_players_nicknames.join(", ")
+        td style="text-align: center;"
+          b style="color: #c0392b;" = match.red_team_score
+          | :
+          b style="color: #2980b9;" = match.blue_team_score
+        td style="color: #2980b9;" = match.blue_team_players_nicknames.join(", ")

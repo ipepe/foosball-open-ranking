@@ -1,44 +1,40 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 en:
   application:
     title: Foosball Open Ranking Platform
 
-  link:
-    main_index: Main page
-    players_index: Players
-    matches_index: Matches
-    players_new: New player
-    matches_new: New match
+  links:
+    devise:
+      login: Login
+      logout: Logout
+    player:
+      index: Players
+      new: New player
+    match:
+      index: Matches
+      new: New match
 
   main_index:
     headers:
       players: Top 5 players
       matches: Last 5 matches
-    matches_table:
-      date: Date
-      red_team_score: Red score
-      red_team_nicks : Red players
-      blue_team_nicks : Blue players
-      blue_team_score: Blue score
-    players_table:
-      nickname: Nick
+
+  activerecord:
+    models:
+      user: User
+      match: Match
+      player: Player
+    attributes:
+      user:
+        email: Email
+      match:
+        date: Date
+        red_team_score: Red team score
+        blue_team_score: Blue team score
+        red_team_nicknames: Red team nicknames
+        blue_team_nicknames: Blue team nicknames
+        red_team: Red team
+        blue_team: Blue team
+      player:
+        nickname: Nickname
+        rating_points: Rating points
+        days_old: Created days ago

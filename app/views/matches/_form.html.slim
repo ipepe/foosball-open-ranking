@@ -6,4 +6,34 @@
         - @match.errors.full_messages.each do |message|
           li = message
 
+  .form-group
+    = f.label :date
+    = f.date_field :date, class: "form-control", required: 'required', "data-provide" => "datepicker",
+            "data-date-format"=>"yyyy-mm-dd", pattern:"^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$",
+            title: "Data w formacie rrrr-mm-dd", value: Date.today
+  /TODO: edycja będzie miała już ustawione wartości w selectach
+  table.table
+    colgroup
+      col style="background-color:#c0392b;"
+      col style="background-color:#2980b9;"
+    thead
+      tr
+        th = I18n.t('activerecord.attributes.match.red_team')
+        th = I18n.t('activerecord.attributes.match.blue_team')
+    tbody
+      tr
+        td = select('match[red_team_players_attributes][0]', "id", Player.select_collection, selected: @match.red_team_players.first.try(:id) )
+        td = select('match[blue_team_players_attributes][0]', "id", Player.select_collection, selected: @match.blue_team_players.first.try(:id) )
+      tr
+        td = select('match[red_team_players_attributes][1]', "id", Player.select_collection, selected: @match.red_team_players.second.try(:id) )
+        td = select('match[blue_team_players_attributes][1]', "id", Player.select_collection, selected: @match.blue_team_players.second.try(:id) )
+      tr
+        td.form-group
+          = f.number_field :red_team_score, class: 'form-control'
+        td.form-group
+          = f.number_field :blue_team_score, class: 'form-control'
+
+  /.form-group
+  /  = f.label :nickname
+  /  = f.text_field :nickname, class:"form-control"
   .actions = f.submit

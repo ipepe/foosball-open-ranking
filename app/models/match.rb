@@ -14,9 +14,21 @@ class Match < ActiveRecord::Base
   validates :date, presence: true
 
   validate do
-    if red_team_score == blue_team_score
+    if self.can_be_ranked? && red_team_score.to_i == blue_team_score.to_i
       errors.add :red_team_score, "Score can't be even"
       errors.add :blue_team_score, "Score can't be even"
+    end
+  end
+
+  validate do
+    if self.player_match_participations.confirmed.exists?
+      errors.add :confirmed, "Match can't be changed when confirmed by at least one player"
+    end
+  end
+
+  validate do
+    if (arr = [players.to_a, red_team_players.to_a, blue_team_players.to_a].flatten.map(&:id).uniq).size < 4
+      errors.add :players, "Match should have some players instead it has #{arr.size}"
     end
   end
 
@@ -31,8 +43,10 @@ class Match < ActiveRecord::Base
 
   after_commit :rerank_players
 
+  accepts_nested_attributes_for :red_team_players, :blue_team_players
+
   def can_be_ranked?
-    true#jakaś bardziej skomplikowana logika, np potwierdzenia graczy lub odpowiedni wynik
+    blue_player_match_participations.confirmed.exists? && red_player_match_participations.confirmed.exists?
   end
 
   # slug
@@ -48,11 +62,11 @@ class Match < ActiveRecord::Base
     end
   end
 
-  def red_team_players_nicks
+  def red_team_players_nicknames
     red_team_players.map &:nickname
   end
 
-  def blue_team_players_nicks
+  def blue_team_players_nicknames
     blue_team_players.map &:nickname
   end
 

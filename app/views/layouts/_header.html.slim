@@ -1,44 +1,33 @@
 nav.navbar.navbar-inverse
   .container-fluid
     .navbar-header
-      a.navbar-brand href="/"  Foosball Open Ranking
+      = link_to root_path, class:"navbar-brand"
+        .inline
+          img src="/icon.png"
+          .inline Foosball Open Ranking
     - if current_user.present?
       ul.nav.navbar-nav
-        li.active
-          a href="/"
-            span.glyphicon.glyphicon-log-out
-            | Logout
         li
-          a href="#"  Page 1
+          = link_to players_path
+            span.glyphicon.glyphicon-user
+            = I18n.t('links.player.index')
         li
-          a href="#"  Page 2
+          = link_to matches_path
+            span.glyphicon.glyphicon-inbox
+            = I18n.t('links.match.index')
         li
-          a href="#"  Page 3
+          = link_to new_match_path
+            span.glyphicon.glyphicon-plus
+            span.glyphicon.glyphicon-inbox
+            = I18n.t('links.match.new')
     ul.nav.navbar-nav.navbar-right
       - if current_user.present?
         li
-          a href="/users/sign_out"
+          = link_to destroy_user_session_path
             span.glyphicon.glyphicon-log-out
-            | Logout
+            = I18n.t('links.devise.logout') + ' ' + current_user.label
       - else
         li
-          a href="/users/sign_in"
+          = link_to new_user_session_path
             span.glyphicon.glyphicon-log-in
-            | Login
-/#header
-/  .navbar.navbar-default.container-fluid
-/    div
-/      ul.nav.navbar-nav
-/        li: a(href="/") = I18n.t('link.main_index')
-/        li: a(href="/players/new")
-/          i.fa.fa-plus
-/          span = I18n.t('link.players_new')
-/        li: a(href="/matches/new")
-/          i.fa.fa-plus
-/          span = I18n.t('link.matches_new')
-/        li: a(href="/players")
-/          i.fa.fa-search
-/          span = I18n.t('link.players_index')
-/        li: a(href="/matches")
-/          i.fa.fa-arrows
-/          span = I18n.t('link.matches_index')
+            = I18n.t('links.devise.login')

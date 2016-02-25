@@ -10,6 +10,7 @@ group :development, :test do
   gem 'thor'
   gem 'faker'
   gem "better_errors"
+  gem 'binding_of_caller'
 end
 
 group :production, :mysql do
@@ -33,6 +34,7 @@ gem 'spring',                    group: :development
 # assets pipeline
 source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap-sass-official'
+  gem 'rails-assets-bootstrap-datepicker'
 end
 
 # project related gems
@@ -44,13 +46,7 @@ gem 'will_paginate'
 gem 'non-stupid-digest-assets'
 gem 'quiet_assets'
 
-# gem 'faker'
-#
-# gem 'geocoder'
-# gem 'maxminddb'
-#
 # gem 'gon'
-
 # gem 'rolify'
 # gem 'cancancan'
 

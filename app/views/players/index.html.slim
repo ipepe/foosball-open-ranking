@@ -1,7 +1,7 @@
 .container-fluid
   h1 Listing players
   div
-    a href="/players/new"
-      i.fa.fa-plus
-      span = I18n.t('link.players_new')
+    = link_to new_player_path
+      span.glyphicon.glyphicon-plus
+      = I18n.t('links.player.new')
   == render 'players/table'

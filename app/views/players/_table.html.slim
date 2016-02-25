@@ -1,14 +1,16 @@
 table.table
   thead
     tr
-      th = I18n.t('players.table.nickname')
-      th = I18n.t('players.table.rating_points')
-      th = I18n.t('players.table.days_old')
-
+      th = I18n.t('activerecord.attributes.user.email')
+      th = I18n.t('activerecord.attributes.player.nickname')
+      th = I18n.t('activerecord.attributes.player.rating_points')
+      th = I18n.t('activerecord.attributes.player.days_old')
   tbody
     - @players.each do |player|
       tr
         td
-          a(href="/players/#{player.id}") = player.nickname
+          -if player.user.present?
+            = link_to player.user.try(:email), user_path(player.user)
+        td = link_to player.nickname, player_path(player)
         td = player.rating_points
         td = "#{player.days_old}d"

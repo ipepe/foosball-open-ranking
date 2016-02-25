@@ -6,10 +6,7 @@
         - @player.errors.full_messages.each do |message|
           li = message
 
-  .field
+  .form-group
     = f.label :nickname
-    = f.text_field :nickname
-  .field
-    = f.label :rating_points
-    = f.number_field :rating_points
+    = f.text_field :nickname, class:"form-control", autofocus: 'autofocus'
   .actions = f.submit

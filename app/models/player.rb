@@ -1,5 +1,6 @@
 class Player < ActiveRecord::Base
 
+  belongs_to :user
   has_many :player_match_participations
   has_many :matches, through: :player_match_participations
 
@@ -10,6 +11,19 @@ class Player < ActiveRecord::Base
   has_many :red_team_players, through: :red_player_match_participations, class_name: 'Match', source: 'match'
 
   scope :top10, -> { Player.all }
+
+  belongs_to :created_by, class_name: 'User'
+
+  after_create do
+    unless created_by.players.exists?
+      created_by.players << self
+      created_by.save!
+    end
+  end
+
+  def self.select_collection
+    all.map{|p| [p.nickname, p.id] }
+  end
 
   def days_old
     (Date.today - self.created_at.to_date).to_i

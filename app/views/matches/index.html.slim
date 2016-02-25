@@ -1,7 +1,7 @@
 .container-fluid
   h1 Listing matches
   div
-    a href="/matches/new"
-      i.fa.fa-plus
-      span = I18n.t('link.matches_new')
+    = link_to new_match_path
+      span.glyphicon.glyphicon-plus
+      = I18n.t('links.match.new')
   == render 'matches/table'

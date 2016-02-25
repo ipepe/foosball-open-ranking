@@ -24,11 +24,11 @@ class PlayersController < ApplicationController
   # POST /players
   # POST /players.json
   def create
-    @player = Player.new(player_params)
+    @player = Player.new(player_params.merge(created_by: current_user))
 
     respond_to do |format|
       if @player.save
-        format.html { redirect_to @player, notice: 'Player was successfully created.' }
+        format.html { redirect_to players_path, notice: 'Player was successfully created.' }
         format.json { render :show, status: :created, location: @player }
       else
         format.html { render :new }
