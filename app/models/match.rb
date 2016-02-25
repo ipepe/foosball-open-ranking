@@ -122,7 +122,7 @@ class Match < ActiveRecord::Base
     blue_team_players.map &:nickname
   end
 
-  # private
+  private
 
   def rerank_players
     if self.can_be_ranked?

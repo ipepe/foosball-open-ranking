@@ -6,3 +6,10 @@ Ruby on Rails implementation of open ranking based on ELO
 
 Website is hosted here:
 <SOON>
+
+
+# openshift repo location
+
+```bash
+git remote add os ssh://56cece0b7628e14d28000107@foos-ipepe.rhcloud.com/~/git/foos.git/
+```
