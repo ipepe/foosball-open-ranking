@@ -23,3 +23,8 @@ rhc env list -a foos
 ```
 rhc env set GOOGLE_SECRET_KEY=testkey -a foos
 ```
+
+## SSH server
+```
+ssh 56cece0b7628e14d28000107@foos-ipepe.rhcloud.com
+```
