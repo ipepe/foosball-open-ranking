@@ -12,11 +12,16 @@ class Match < ActiveRecord::Base
 
   validates :date, :created_by_id, presence: true
   validates :confirmed_at, presence: true, if: 'confirmed_by_id.present?'
+  validates_inclusion_of :already_ranked, in: [true, false]
 
   before_validation do
     if confirmed_by_id_changed?
       self.confirmed_at = DateTime.now
     end
+  end
+
+  before_save do
+    !self.already_ranked
   end
 
   validate do
@@ -39,9 +44,7 @@ class Match < ActiveRecord::Base
   end
 
   validate do
-    if self.confirmed_by_id.present? && !confirmed_by_id_changed?
-      errors.add :base, "Match can't be changed when confirmed by at least one player"
-    end
+    errors.add :base if self.already_ranked
   end
 
   validate do
@@ -122,10 +125,8 @@ class Match < ActiveRecord::Base
     blue_team_players.map &:nickname
   end
 
-  private
-
   def rerank_players
-    if self.can_be_ranked?
+    if self.can_be_ranked? && !self.already_ranked
       self.reload
       # puts "Im reranking players: #{players.map(&:id)}"
       #nie można zmieniać rating_pointsu podczas pracy algorytmu rankujacego wiec zapisujemy nowe rating_pointsi a potem przypisujemy je playerom
@@ -135,6 +136,7 @@ class Match < ActiveRecord::Base
         player.rating_points = hash[:rating_points]
         player.save!
       end
+      self.update_attribute(:already_ranked, true)
     end
     true
   end

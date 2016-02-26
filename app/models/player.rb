@@ -45,7 +45,6 @@ class Player < ActiveRecord::Base
     matches_limit = 25 #after this count of matches, we can assume accurate rating_points of player
     matches_count_limited = if self.matches.count < matches_limit then self.matches.count else matches_limit end
     matches_count_limited_total = match.players.map do |p|
-      puts "test"
       p.matches.count
     end
     matches_count_limited_total = matches_count_limited_total.map{|match_count| if match_count < matches_limit then match_count else matches_limit end}.inject(&:+)
