@@ -4,7 +4,7 @@ class PlayersController < ApplicationController
   # GET /players
   # GET /players.json
   def index
-    @players = Player.all.paginate(per_page: 15, page: 1)
+    @players = Player.all#.paginate(per_page: 15, page: 1)
   end
 
   # GET /players/1

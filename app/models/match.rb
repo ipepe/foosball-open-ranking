@@ -62,7 +62,13 @@ class Match < ActiveRecord::Base
   validates :blue_team_score, numericality: { only_integer: true, less_than_or_equal_to: 3, greater_than_or_equal_to: 0}, presence: true
   validates :red_team_score, numericality: { only_integer: true, less_than_or_equal_to: 3, greater_than_or_equal_to: 0}, presence: true
 
-  after_commit :rerank_players
+  after_commit do
+    match = self
+    Rails.application.scheduler.in '3s' do
+      puts "Reranking players in scheduler"
+      match.rerank_players
+    end
+  end
 
   def players
     [red_team_players, blue_team_players].flatten

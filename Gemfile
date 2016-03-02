@@ -13,9 +13,10 @@ group :development, :test do
   gem 'binding_of_caller'
 end
 
-group :production, :mysql do
-  gem 'mysql2', '~> 0.3.20' #version >= 4.0.0 is not compatible with this rails version
-end
+# we don't need mysql
+#group :production, :mysql do
+#  gem 'mysql2', '~> 0.3.20' #version >= 4.0.0 is not compatible with this rails version
+#end
 
 group :production, :postgresql do
   gem 'pg'
@@ -45,6 +46,8 @@ gem 'will_paginate'
 
 gem 'non-stupid-digest-assets'
 gem 'quiet_assets'
+
+gem 'rufus-scheduler'
 
 # gem 'gon'
 # gem 'rolify'
