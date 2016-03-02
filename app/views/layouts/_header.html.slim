@@ -21,6 +21,10 @@ nav.navbar.navbar-inverse
             span.glyphicon.glyphicon-inbox
             = I18n.t('links.match.new')
     ul.nav.navbar-nav.navbar-right
+      li
+        a href="https://github.com/ipepe/foosball-open-ranking"
+          span.glyphicon.glyphicon-tags
+          | GitHub.com
       - if current_user.present?
         li
           = link_to destroy_user_session_path
