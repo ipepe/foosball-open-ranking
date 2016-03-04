@@ -9,7 +9,8 @@ Rails.application.routes.draw do
   resources :users
 
   namespace :api do
-    resources :players, only: [:index]
+    resources :players, only: [:index, :show]
+    resources :matches, only: [:index]
   end
 
 end
