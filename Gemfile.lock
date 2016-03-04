@@ -152,7 +152,6 @@ GEM
       activesupport (>= 3.1, < 5.0)
       railties (>= 3.1, < 5.0)
       slim (~> 3.0)
-    spring (1.6.3)
     sprockets (2.12.4)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -206,7 +205,6 @@ DEPENDENCIES
   sass-rails (~> 4.0.5)
   sdoc (~> 0.4.0)
   slim-rails
-  spring
   sqlite3
   thor
   turbolinks
