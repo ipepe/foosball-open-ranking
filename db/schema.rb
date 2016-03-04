@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160226071542) do
+ActiveRecord::Schema.define(version: 20160304122310) do
 
   create_table "matches", force: true do |t|
     t.integer  "red_team_score",          default: 0,     null: false
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 20160226071542) do
     t.string   "uid"
     t.string   "first_name"
     t.string   "last_name"
+    t.string   "apikey"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

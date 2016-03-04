@@ -8,4 +8,8 @@ Rails.application.routes.draw do
   resources :players
   resources :users
 
+  namespace :api do
+    resources :players, only: [:index]
+  end
+
 end
