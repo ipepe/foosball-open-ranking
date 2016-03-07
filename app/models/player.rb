@@ -1,5 +1,7 @@
 class Player < ActiveRecord::Base
 
+  has_many :player_rating_changes
+
   default_scope { order(rating_points: :desc) }
 
   belongs_to :user

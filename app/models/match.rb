@@ -7,6 +7,8 @@ class Match < ActiveRecord::Base
   belongs_to :blue_team_player_one, class_name: 'Player'
   belongs_to :blue_team_player_two, class_name: 'Player'
 
+  has_many :player_rating_changes
+
   belongs_to :created_by,   class_name: 'User'
   belongs_to :confirmed_by, class_name: 'User'
 
@@ -131,16 +133,34 @@ class Match < ActiveRecord::Base
     blue_team_players.map &:nickname
   end
 
+  def rating_points_difference_for(player)
+    self.player_rating_changes.find_by(player_id: player.id).try(:rating_points_difference).try(:to_i)
+  end
+
+  def self.rerank_players
+    ActiveRecord::Base.transaction do
+      Player.all.update_all({rating_points: 1500})
+      Match.where.not(confirmed_by_id: nil).to_a.sort_by(&:confirmed_at).each do |match|
+        match.rerank_players
+      end
+    end
+  end
+
   def rerank_players
     if self.can_be_ranked? && !self.already_ranked
       self.reload
-      # puts "Im reranking players: #{players.map(&:id)}"
-      #nie można zmieniać rating_pointsu podczas pracy algorytmu rankujacego wiec zapisujemy nowe rating_pointsi a potem przypisujemy je playerom
+
+      #nie można zmieniać rating_pointsów podczas pracy algorytmu rankujacego wiec
+      # zapisujemy nowe rating_pointsy a potem przypisujemy je playerom
       new_rating_points = self.players.flatten.map{|p| {id: p.id, rating_points: p.rank(self)} }
       new_rating_points.each do |hash|
-        player = Player.find(hash[:id].to_i)
+        player_id = hash[:id].to_i
+        player = Player.find(player_id)
+        prc = PlayerRatingChange.find_or_initialize_by(player_id: player_id, match_id: self.id)
+        prc.rating_points_difference = hash[:rating_points] - player.rating_points
         player.rating_points = hash[:rating_points]
         player.save!
+        prc.save!
       end
       self.update_attribute(:already_ranked, true)
     end
