@@ -138,6 +138,7 @@ class Match < ActiveRecord::Base
   end
 
   def self.rerank_players
+    puts "Reranking all matches at: #{Time.now}"
     ActiveRecord::Base.transaction do
       Player.all.update_all({rating_points: 1500})
       Match.where.not(confirmed_by_id: nil).to_a.sort_by(&:confirmed_at).each do |match|
