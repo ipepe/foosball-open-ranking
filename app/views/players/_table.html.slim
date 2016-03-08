@@ -28,3 +28,21 @@ table.table
             - if player.can_dettach?(current_user)
               = link_to 'Dettach!', {:action => "update", :controller => "players",
                       :id =>player.id, player: {user_id: nil}}, method: :put
+  - unless @table_without_actions
+    tfoot
+      tr
+        th Players count
+        th
+        th
+        th Players average rating points
+        th
+        th
+        th
+      tr
+        td = Player.all.count
+        td
+        td
+        td = Player.all.sum(:rating_points)/Player.all.count
+        td
+        td
+        td
