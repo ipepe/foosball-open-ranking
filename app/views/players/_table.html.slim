@@ -1,22 +1,24 @@
 table.table
   thead
     tr
+      th = I18n.t('activerecord.attributes.player.ranking_place')
       th = I18n.t('activerecord.attributes.user.email')
       th = I18n.t('activerecord.attributes.player.nickname')
       th = I18n.t('activerecord.attributes.player.rating_points')
-      th = I18n.t('activerecord.attributes.player.days_old')
+      th = I18n.t('activerecord.attributes.player_rating_change.rating_points_difference')
       - unless @table_without_actions
         th = I18n.t('activerecord.attributes.player.attach')
         th = I18n.t('activerecord.attributes.player.dettach')
   tbody
-    - @players.each do |player|
+    - @players.each_with_index do |player, i|
       tr
+        td = i+1
         td
           -if player.user.present?
             = link_to player.user.try(:email), user_path(player.user)
         td = link_to player.nickname, player_path(player)
         td = player.rating_points
-        td = "#{player.days_old}d"
+        td = player.player_rating_changes.last.try(:formatted_rating_points_difference)
         - unless @table_without_actions
           td
             - if player.can_attach?

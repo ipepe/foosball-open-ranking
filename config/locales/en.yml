@@ -36,7 +36,10 @@ en:
         blue_team: Blue team
         ranked: Ranked
         confirm: Confirm
+      player_rating_change:
+        rating_points_difference: Rating points difference
       player:
+        ranking_place: Ranking place
         nickname: Nickname
         rating_points: Rating points
         days_old: Created days ago

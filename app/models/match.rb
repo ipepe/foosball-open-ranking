@@ -134,7 +134,7 @@ class Match < ActiveRecord::Base
   end
 
   def rating_points_difference_for(player)
-    self.player_rating_changes.find_by(player_id: player.id).try(:rating_points_difference).try(:to_i)
+    self.player_rating_changes.find_by(player_id: player.id).try(:formatted_rating_points_difference)
   end
 
   def self.rerank_players
