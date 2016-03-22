@@ -36,6 +36,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap-sass-official'
   gem 'rails-assets-bootstrap-datepicker'
+  gem 'rails-assets-plotly.js'
 end
 
 # project related gems
@@ -49,14 +50,13 @@ gem 'quiet_assets'
 
 gem 'rufus-scheduler'
 
-# gem 'gon'
+gem 'gon'
 # gem 'rolify'
 # gem 'cancancan'
 
 #devise
 gem 'devise'
 gem 'omniauth'
-# gem 'omniauth-facebook'
 gem "omniauth-google-oauth2"
 
 

@@ -7,6 +7,13 @@
     strong rating_points points:
     = @player.rating_points
 
+  #player_rating_plot
+
   = link_to 'Edit', edit_player_path(@player)
   '|
   = link_to 'Back', players_path
+
+coffee:
+  data = [{ x: (gon?.player?.dates || []), y: (gon?.player?.scores || []), type: 'scatter' }]
+  $().ready ->
+    Plotly.newPlot('player_rating_plot', data)

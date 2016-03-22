@@ -10,6 +10,15 @@ class PlayersController < ApplicationController
   # GET /players/1
   # GET /players/1.json
   def show
+    gon.player = {}
+    gon.player[:dates] = @player.player_rating_changes.order(:created_at).map(&:created_at)
+    gon.player[:dates].unshift(@player.created_at)
+    gon.player[:dates].map! { |d|  d.strftime('%Y-%m-%d %H:%M:%S.%s') }
+    score = 1500
+    gon.player[:scores] = @player.player_rating_changes.order(:created_at).map(&:rating_points_difference).map do |rpd|
+      score += rpd
+    end
+    gon.player[:scores].unshift(1500)
   end
 
   # GET /players/new
