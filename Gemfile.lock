@@ -77,6 +77,9 @@ GEM
     jquery-rails (3.1.4)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
+    jquery-turbolinks (2.1.0)
+      railties (>= 3.1.0)
+      turbolinks
     json (1.8.3)
     jwt (1.5.1)
     mail (2.6.3)
@@ -200,6 +203,7 @@ DEPENDENCIES
   gon
   jbuilder (~> 2.0)
   jquery-rails
+  jquery-turbolinks
   minitest
   non-stupid-digest-assets
   omniauth

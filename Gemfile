@@ -28,6 +28,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'turbolinks'
+gem 'jquery-turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
@@ -63,5 +64,3 @@ gem "omniauth-google-oauth2"
 gem 'yaml_db'
 #rake db:data:dump   ->   Dump contents of Rails database to db/data.yml
 #rake db:data:load   ->   Load contents of db/data.yml into the database
-
-
