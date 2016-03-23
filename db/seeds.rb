@@ -43,7 +43,9 @@ Match.create!(
     blue_team_player_one: p2,
     blue_team_player_two: p3,
     created_by: u2,
-    date: Date.today
+    date: Date.today,
+    confirmed_by: u1,
+    confirmed_at: Time.now + 1.hour
 )
 Match.create!(
     red_team_score: 3,
