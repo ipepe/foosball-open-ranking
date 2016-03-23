@@ -10,7 +10,7 @@ class PlayersController < ApplicationController
   # GET /players/1
   # GET /players/1.json
   def show
-    gon.player = {}
+    gon.player = {id: @player.id}
     rating_changes = @player.player_rating_changes.sort {|a,b| a.match.confirmed_at <=> b.match.confirmed_at}
     gon.player[:dates] = rating_changes.map{ |rc| rc.match.confirmed_at }
     gon.player[:dates].unshift(@player.created_at)

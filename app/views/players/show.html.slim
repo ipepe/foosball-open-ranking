@@ -15,5 +15,6 @@
 
 coffee:
   data = [{ x: (gon?.player?.dates || []), y: (gon?.player?.scores || []), type: 'scatter' }]
-  $().ready ->
-    Plotly.newPlot('player_rating_plot', data)
+  Plotly.newPlot('player_rating_plot', data)
+  $(document).on 'page:before-change', ->
+    Plotly.deleteTraces('player_rating_plot', 0) if $('player_rating_plot').length
