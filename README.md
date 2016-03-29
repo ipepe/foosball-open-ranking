@@ -29,5 +29,17 @@ rhc env set GOOGLE_SECRET_KEY=testkey -a foos
 ssh 56cece0b7628e14d28000107@foos-ipepe.rhcloud.com
 ```
 
+# Kopiowanie backupu
+
+```
+scp 56cece0b7628e14d28000107@foos-ipepe.rhcloud.com:/var/lib/openshift/56cece0b7628e14d28000107/app-root/repo/db/data.yml ~/foosball_db_backup_20160329.yml
+```
+
+# Reset rankingu
+
+```
+RAILS_ENV=production bundle exec rake players:rerank
+```
+
 ## Server needs changes for deployment
 1
