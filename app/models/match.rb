@@ -149,9 +149,9 @@ class Match < ActiveRecord::Base
     end
 
     if self.winners.include?(player)
-      550 - (50*success_multipler)
+      350 + (50*success_multipler)
     else
-      -550 - (50*success_multipler)
+      -350 + (50*success_multipler)
     end
   end
 
