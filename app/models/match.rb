@@ -118,10 +118,40 @@ class Match < ActiveRecord::Base
   end
 
   def winners
-    if red_team_score > blue_team_score
+    if self.winner_team_color == :red
       red_team_players
     else
       blue_team_players
+    end
+  end
+
+  def winner_team_color
+    if red_team_score > blue_team_score
+      :red
+    else
+      :blue
+    end
+  end
+
+  def success_value(player)
+    success_multipler = if self.winners.include?(player)
+      if self.winner_team_color == :red
+        red_team_score - blue_team_score
+      else
+        blue_team_score - red_team_score
+      end
+    else # looser
+      if self.winner_team_color == :red
+        blue_team_score - red_team_score
+      else
+        red_team_score - blue_team_score
+      end
+    end
+
+    if self.winners.include?(player)
+      550 - (50*success_multipler)
+    else
+      -550 - (50*success_multipler)
     end
   end
 
