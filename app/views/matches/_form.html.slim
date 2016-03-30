@@ -22,11 +22,11 @@
         th = I18n.t('activerecord.attributes.match.blue_team')
     tbody
       tr
-        td = f.collection_select(:red_team_player_one_id, Player.all, :id, :nickname, include_blank: true)
-        td = f.collection_select(:blue_team_player_one_id, Player.all, :id, :nickname, include_blank: true)
+        td = f.collection_select(:red_team_player_one_id, Player.ordered_by_nicks, :id, :nickname, include_blank: true)
+        td = f.collection_select(:blue_team_player_one_id, Player.ordered_by_nicks, :id, :nickname, include_blank: true)
       tr
-        td = f.collection_select(:red_team_player_two_id, Player.all, :id, :nickname, include_blank: true)
-        td = f.collection_select(:blue_team_player_two_id, Player.all, :id, :nickname, include_blank: true)
+        td = f.collection_select(:red_team_player_two_id, Player.ordered_by_nicks, :id, :nickname, include_blank: true)
+        td = f.collection_select(:blue_team_player_two_id, Player.ordered_by_nicks, :id, :nickname, include_blank: true)
       tr
         td.form-group
           = f.number_field :red_team_score, class: 'form-control'

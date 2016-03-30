@@ -4,7 +4,8 @@ class Player < ActiveRecord::Base
 
   has_many :player_rating_changes
 
-  default_scope { order(rating_points: :desc) }
+  scope :ordered_by_nicks, -> { order(:nickname) }
+  scope :ordered_by_ranking, -> { order(rating_points: :desc) }
 
   belongs_to :user
 
