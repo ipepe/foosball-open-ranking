@@ -37,7 +37,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap-sass-official'
   gem 'rails-assets-bootstrap-datepicker'
-  gem 'rails-assets-plotly.js'
+  gem 'rails-assets-d3'
 end
 
 # project related gems
