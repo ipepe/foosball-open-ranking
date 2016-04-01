@@ -14,13 +14,19 @@
   = link_to 'Back', players_path
 
 javascript:
-  var data = {x: gon.player.dates, y: gon.player.scores}
+  var formatDate = d3.time.format("%Y-%m-%d %H:%M");
+
+  var data = gon.player.plot_data
+
+  data.forEach(function(item){
+    item.date = formatDate.parse(item.date);
+  });
+
+  console.log(data);
 
   var margin = {top: 20, right: 20, bottom: 30, left: 50},
       width = 960 - margin.left - margin.right,
       height = 500 - margin.top - margin.bottom;
-
-  var formatDate = d3.time.format("%Y-%m-%d %H:%M:%S.%s");
 
   var x = d3.time.scale()
       .range([0, width]);
@@ -37,8 +43,8 @@ javascript:
       .orient("left");
 
   var line = d3.svg.line()
-      .x(function(x) { return x(d.date); })
-      .y(function(y) { return y(d.close); });
+      .x(function(x) { console.log(x.date);return x.date; })
+      .y(function(y) { console.log(y.score);return y.score; });
 
   var svg = d3.select("#player_rating_plot").append("svg")
       .attr("width", width + margin.left + margin.right)
@@ -47,7 +53,7 @@ javascript:
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
   x.domain(d3.extent(data, function(d) { return d.date; }));
-  y.domain(d3.extent(data, function(d) { return d.close; }));
+  y.domain(d3.extent(data, function(d) { return d.score; }));
 
   svg.append("g")
       .attr("class", "x axis")
@@ -62,18 +68,12 @@ javascript:
       .attr("y", 6)
       .attr("dy", ".71em")
       .style("text-anchor", "end")
-      .text("Price ($)");
+      .text("Rating points");
 
   svg.append("path")
       .datum(data)
       .attr("class", "line")
       .attr("d", line);
-
-  function type(d) {
-    d.date = formatDate.parse(d.date);
-    d.close = +d.close;
-    return d;
-  }
 
 /coffee:
   /data = [{ x: (gon?.player?.dates || []), y: (gon?.player?.scores || []), type: 'scatter' }]
