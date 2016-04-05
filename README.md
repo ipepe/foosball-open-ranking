@@ -32,7 +32,7 @@ ssh 56cece0b7628e14d28000107@foos-ipepe.rhcloud.com
 # Kopiowanie backupu
 
 ```
-scp 56cece0b7628e14d28000107@foos-ipepe.rhcloud.com:/var/lib/openshift/56cece0b7628e14d28000107/app-root/repo/db/data.yml ~/foosball_db_backup_20160329.yml
+scp 56cece0b7628e14d28000107@foos-ipepe.rhcloud.com:/var/lib/openshift/56cece0b7628e14d28000107/app-root/repo/db/data.yml ~/foosball_db_backup_tmp.yml
 ```
 
 # Reset rankingu
