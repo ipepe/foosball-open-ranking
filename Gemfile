@@ -32,15 +32,9 @@ gem 'jquery-turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
-
-# assets pipeline
-# source 'https://rails-assets.org' do
-#   gem 'rails-assets-bootstrap-sass-official'
-#   gem 'rails-assets-bootstrap-datepicker'
-#   gem 'rails-assets-d3'
-# end
-
-gem "ember-cli-rails"
+gem "ember-cli-rails", git: 'https://github.com/ipepe/ember-cli-rails.git'
+gem "ember-cli-rails-assets", git: 'https://github.com/ipepe/ember-cli-rails-assets.git'
+gem "html_page", git: "https://github.com/ipepe/html_page.git"
 
 # project related gems
 gem 'dotenv-rails'
@@ -58,7 +52,7 @@ gem 'gon'
 # gem 'cancancan'
 
 #devise
-gem 'devise'
+gem 'devise', '< 4.0.0'
 gem 'omniauth'
 gem "omniauth-google-oauth2"
 

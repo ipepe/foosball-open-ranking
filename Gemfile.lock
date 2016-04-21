@@ -1,3 +1,23 @@
+GIT
+  remote: https://github.com/ipepe/ember-cli-rails-assets.git
+  revision: 9c7a883f4192e6ffedd2095b87f4d73b7885d815
+  specs:
+    ember-cli-rails-assets (0.6.2)
+
+GIT
+  remote: https://github.com/ipepe/ember-cli-rails.git
+  revision: 089e4df35bef8d34a04560eef10d874ebe6a6f8b
+  specs:
+    ember-cli-rails (0.7.3)
+      cocaine (~> 0.5.8)
+      railties (>= 3.2, < 5)
+
+GIT
+  remote: https://github.com/ipepe/html_page.git
+  revision: 3ca950f382bc3c611503213a97e5dddd5916f18f
+  specs:
+    html_page (0.1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -49,22 +69,17 @@ GEM
       execjs
     coffee-script-source (1.10.0)
     debug_inspector (0.0.2)
-    devise (4.0.0)
+    devise (3.5.7)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
-      railties (>= 4.1.0, < 5.1)
+      railties (>= 3.2.6, < 5)
       responders
+      thread_safe (~> 0.1)
       warden (~> 1.2.3)
     dotenv (2.1.1)
     dotenv-rails (2.1.1)
       dotenv (= 2.1.1)
       railties (>= 4.0, < 5.1)
-    ember-cli-rails (0.7.3)
-      cocaine (~> 0.5.8)
-      ember-cli-rails-assets (~> 0.6.2)
-      html_page (~> 0.1.0)
-      railties (>= 3.2, < 5)
-    ember-cli-rails-assets (0.6.2)
     erubis (2.7.0)
     execjs (2.6.0)
     faker (1.6.3)
@@ -78,7 +93,6 @@ GEM
       request_store (>= 1.0)
     hashie (3.4.3)
     hike (1.2.3)
-    html_page (0.1.0)
     i18n (0.7.0)
     jbuilder (2.4.1)
       activesupport (>= 3.0.0, < 5.1)
@@ -201,11 +215,13 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   coffee-rails (~> 4.0.0)
-  devise
+  devise (< 4.0.0)
   dotenv-rails
-  ember-cli-rails
+  ember-cli-rails!
+  ember-cli-rails-assets!
   faker
   gon
+  html_page!
   jbuilder (~> 2.0)
   jquery-rails
   jquery-turbolinks
