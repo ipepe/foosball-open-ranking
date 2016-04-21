@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.1.14.1'
+gem 'rails', '4.1.15'
 gem 'rake', '= 0.9.6'
 gem 'rack', '= 1.5.2'
 
@@ -34,13 +34,13 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 
 # assets pipeline
-source 'https://rails-assets.org' do
-  gem 'rails-assets-bootstrap-sass-official'
-  gem 'rails-assets-bootstrap-datepicker'
-  gem 'rails-assets-d3'
-end
+# source 'https://rails-assets.org' do
+#   gem 'rails-assets-bootstrap-sass-official'
+#   gem 'rails-assets-bootstrap-datepicker'
+#   gem 'rails-assets-d3'
+# end
 
-# gem "ember-cli-rails"
+gem "ember-cli-rails"
 
 # project related gems
 gem 'dotenv-rails'

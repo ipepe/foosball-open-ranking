@@ -16,7 +16,7 @@ html lang=I18n.locale
 
   body
     == include_gon
-    == render 'layouts/header'
+    /== render 'layouts/header'
     .container-fluid
       - if [notice,alert].any?(&:present?)
         .container

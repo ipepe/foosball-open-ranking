@@ -11,52 +11,5 @@
  * file per style scope.
  *
  *= require_tree .
-
- *= require 'bootstrap-datepicker'
  *= require_self
  */
-@import "bootstrap-sass-official";
-@font-face {
-  font-family: 'Glyphicons Halflings';
-  src: url('/assets/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.eot');
-  src: url('/assets/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('/assets/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.woff') format('woff'), url('/assets/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.ttf') format('truetype'), url('/assets/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
-}
-
-.navbar{
-  border-radius: 0px;
-}
-
-.glyphicon{
-  padding: 3px;
-}
-
-body, .container, .container-fluid{
-  max-width: 100vw;
-  word-wrap: break-word;
-}
-
-.inline{
-  display: inline-block;
-}
-
-//player plot stylesheets
-#player_rating_plot {
-  font: 10px sans-serif;
-}
-
-.axis path,
-.axis line {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
-}
-
-.x.axis path {
-  display: none;
-}
-
-.line {
-  fill: none;
-  stroke: steelblue;
-  stroke-width: 1.5px;
-}

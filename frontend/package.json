@@ -28,6 +28,7 @@
     "ember-cli": "2.5.0",
     "ember-cli-app-version": "^1.0.0",
     "ember-cli-babel": "^5.1.6",
+    "ember-cli-rails-addon": "~0.7.0",
     "ember-cli-coffeescript": "1.13.2",
     "ember-cli-dependency-checker": "^1.2.0",
     "ember-cli-emberscript": "git://github.com/kristianmandrup/ember-cli-emberscript",
