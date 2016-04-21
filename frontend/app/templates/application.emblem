@@ -7,7 +7,7 @@ paper-nav-container
     paper-content
       paper-list
         paper-item action="transitionTo" param="index" | Home
-        paper-item action="transitionTo" param="todos" | Todos
+        paper-item action="transitionTo" param="matches" | Matches
   div layout="column" tabindex="-1" role="main" flex='flex'
     paper-toolbar
       .md-toolbar-tools

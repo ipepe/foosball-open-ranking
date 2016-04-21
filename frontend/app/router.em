@@ -4,7 +4,7 @@
 `const Router = Ember.Router.extend({ location: config.locationType });`
 
 Router.map ->
-  @route 'todos'
+  @route 'matches'
 #  @route('not_found', { path: '*:'})
 
 `export default Router;`

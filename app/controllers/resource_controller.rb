@@ -1,4 +1,5 @@
 class ResourceController < ApplicationController
+  respond_to :json
   class_attribute :resource_class
   before_action :set_resource, only: [:show, :edit, :update, :destroy]
 
@@ -8,7 +9,20 @@ class ResourceController < ApplicationController
   # GET /resources
   # GET /resources.json
   def index
-    self.resources = resource_class.all.paginate(per_page: 15, page: (params[:page] || 1).to_i)
+    self.resources = resource_class.all
+
+    yield if block_given?
+
+    self.resources = self.resources.paginate(per_page: (params['per_page'] || 20).to_i, page: (params['page'] || 1).to_i)
+
+    hash = {}
+    hash[resource_class_name.pluralize.underscore] = resources
+    hash['meta'] = {
+        current_page: self.resources.current_page,
+        per_page: self.resources.per_page,
+        total_entries: self.resources.total_entries
+    }
+    render json: hash
   end
 
   # GET /resources/1
@@ -29,15 +43,10 @@ class ResourceController < ApplicationController
   # POST /resources.json
   def create
     self.resource = resource_class.new(params_for_create.to_hash.merge({created_by: current_user}))
-
-    respond_to do |format|
-      if resource.save
-        format.html { redirect_to resource, notice: "#{resource_class_name} was successfully created." }
-        format.json { render :show, status: :created, location: resource }
-      else
-        format.html { render :new }
-        format.json { render json: resource.errors, status: :unprocessable_entity }
-      end
+    if resource.save
+      render :show, status: :created, location: resource
+    else
+      render json: resource.errors, status: :unprocessable_entity
     end
   end
 

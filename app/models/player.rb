@@ -39,6 +39,26 @@ class Player < ActiveRecord::Base
   def can_dettach?(user)
     self.user_id == user.id
   end
+  
+  def plot_data
+    hash = {id: @player.id}
+    rating_changes = @player.player_rating_changes.sort {|a,b| a.match.confirmed_at <=> b.match.confirmed_at}
+    hash[:dates] = rating_changes.map{ |rc| rc.match.confirmed_at }
+    hash[:dates].unshift(@player.created_at)
+    hash[:dates].map! { |d|  d.strftime('%Y-%m-%d %H:%M') }
+    score = 1500
+    hash[:scores] = rating_changes.map(&:rating_points_difference).map do |rpd|
+      score += rpd
+    end
+    hash[:scores].unshift(1500)
+
+    hash[:plot_data] = []
+
+    hash[:dates].each_with_index do |d, i|
+      hash[:plot_data].push({date: d, score: hash[:scores][i]})
+    end
+    hash
+  end
 
   # slug
   # def to_param

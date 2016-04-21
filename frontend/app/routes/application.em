@@ -3,7 +3,7 @@
 class ApplicationRoute extends Ember.Route
 
   actions:
-    transitionTo: () ->
+    transitionTo: ->
       @transitionTo.apply(this, arguments)
 
 `export default ApplicationRoute`
