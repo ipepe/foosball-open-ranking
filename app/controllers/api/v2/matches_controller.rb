@@ -4,8 +4,12 @@ module Api::V2
 
     def index
       super do
-        @matches = @matches
+        @matches = @matches.order(:created_at)
+        player_rating_changes = PlayerRatingChange.where(match: @matches)
+        self.render_hash['player_rating_changes'] = player_rating_changes
+        self.render_hash['players'] = Player.where(id: player_rating_changes.pluck(:player_id))
       end
+
     end
     private
 

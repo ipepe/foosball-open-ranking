@@ -6,8 +6,9 @@ paper-nav-container
           strong Menu
     paper-content
       paper-list
-        paper-item action="transitionTo" param="index" | Home
+        paper-item action="transitionTo" param="index" | Last 5/Top 5
         paper-item action="transitionTo" param="matches" | Matches
+        paper-item action="transitionTo" param="players" | Players
   div layout="column" tabindex="-1" role="main" flex='flex'
     paper-toolbar
       .md-toolbar-tools
@@ -15,7 +16,9 @@ paper-nav-container
           paper-button target=toggle action="toggleMenu" icon-button=true
             paper-icon "menu"
         span.md-breadcrumb-page
-          paper-item action="transitionTo" param="index" | Home
+          paper-item action="transitionTo" param="index"
+            img src="/icon.png"
+            | Foosball Open Ranking Platform
 
     paper-content class="md-padding"
       == outlet

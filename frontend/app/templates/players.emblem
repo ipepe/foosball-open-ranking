@@ -1,17 +1,14 @@
 h2 Matches
 paper-content class="md-whiteframe-z1"
   paper-list
-    each model as |match|
+    each model as |player|
       paper-item
         /img src={{item.face}} alt={{item.who}} class="md-avatar">
+        h2 = player.id
         .md-list-item-text
-          span = match.date
-          span = match.red_team_player_one
-          span = match.red_team_player_one.nickname
-          span = match.red_team_player_one.id
-          span = match.red_team_player_two.nickname
-          span = match.blue_team_player_one.nickname
-          span = match.blue_team_player_two.nickname
+          = player.nickname
+          = player.rating_points
+        h2 Prawda
       paper-divider
       /tr
       /  td

@@ -1,6 +1,7 @@
 class ResourceController < ApplicationController
   respond_to :json
   class_attribute :resource_class
+  attr_accessor :render_hash
   before_action :set_resource, only: [:show, :edit, :update, :destroy]
 
   # TODO: ability
@@ -10,19 +11,19 @@ class ResourceController < ApplicationController
   # GET /resources.json
   def index
     self.resources = resource_class.all
+    self.render_hash = {}
 
     yield if block_given?
 
     self.resources = self.resources.paginate(per_page: (params['per_page'] || 20).to_i, page: (params['page'] || 1).to_i)
-
-    hash = {}
-    hash[resource_class_name.pluralize.underscore] = resources
-    hash['meta'] = {
+    
+    self.render_hash[resource_class_name.pluralize.underscore] = resources
+    self.render_hash['meta'] = {
         current_page: self.resources.current_page,
         per_page: self.resources.per_page,
         total_entries: self.resources.total_entries
     }
-    render json: hash
+    render json: self.render_hash
   end
 
   # GET /resources/1

@@ -5,6 +5,6 @@
 
 Router.map ->
   @route 'matches'
-#  @route('not_found', { path: '*:'})
+  @route 'players'
 
 `export default Router;`
