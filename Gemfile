@@ -40,6 +40,8 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-d3'
 end
 
+# gem "ember-cli-rails"
+
 # project related gems
 gem 'dotenv-rails'
 gem 'puma'

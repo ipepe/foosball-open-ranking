@@ -1,0 +1,21 @@
+paper-nav-container
+  paper-sidenav class="md-sidenav-left md-whiteframe-z2" locked-open="gt-sm"
+    paper-toolbar
+      .md-toolbar-tools
+        .logo
+          strong Menu
+    paper-content
+      paper-list
+        paper-item action="transitionTo" param="index" | Home
+        paper-item action="transitionTo" param="todos" | Todos
+  div layout="column" tabindex="-1" role="main" flex='flex'
+    paper-toolbar
+      .md-toolbar-tools
+        paper-sidenav-toggle as |toggle|
+          paper-button target=toggle action="toggleMenu" icon-button=true
+            paper-icon "menu"
+        span.md-breadcrumb-page
+          paper-item action="transitionTo" param="index" | Home
+
+    paper-content class="md-padding"
+      == outlet
