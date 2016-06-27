@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.1.14.1'
+gem 'rails', '4.1.15'
 gem 'rake', '= 0.9.6'
 gem 'rack', '= 1.5.2'
 
@@ -11,6 +11,7 @@ group :development, :test do
   gem 'faker'
   gem "better_errors"
   gem 'binding_of_caller'
+  gem 'pry'
 end
 
 # we don't need mysql
@@ -56,7 +57,7 @@ gem 'gon'
 # gem 'cancancan'
 
 #devise
-gem 'devise'
+gem 'devise', '< 4.0.0'
 gem 'omniauth'
 gem "omniauth-google-oauth2"
 
