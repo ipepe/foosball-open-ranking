@@ -1,4 +1,4 @@
-json.array!(@players) do |player|
+json.players @players do |player|
   json.extract! player, :id, :nickname, :rating_points
-  json.url player_url(player, format: :json)
+  json.is_current_player(player.user_id == current_user.id)
 end
