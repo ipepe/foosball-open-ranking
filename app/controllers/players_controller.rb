@@ -5,6 +5,9 @@ class PlayersController < ApplicationController
   # GET /players.json
   def index
     @players = Player.ordered_by_ranking
+    if params['with_inactive'] != 'true'
+      @players = @players.only_active
+    end
   end
 
   # GET /players/1
