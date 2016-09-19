@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.1.15'
-gem 'rake', '= 0.9.6'
-gem 'rack', '= 1.5.2'
+gem 'rails', '4.2.7.1'
+gem 'rake'
+gem 'rack'
 
 group :development, :test do
   gem 'sqlite3'
@@ -58,7 +58,7 @@ gem 'gon'
 # gem 'cancancan'
 
 #devise
-gem 'devise', '< 4.0.0'
+gem 'devise'
 gem 'omniauth'
 gem "omniauth-google-oauth2"
 
