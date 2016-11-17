@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '2.3.1'
+
 gem 'rails', '4.2.7.1'
 gem 'rake'
 gem 'rack'
@@ -14,10 +16,13 @@ group :development, :test do
   gem 'pry'
 end
 
-# we don't need mysql
-#group :production, :mysql do
-#  gem 'mysql2', '~> 0.3.20' #version >= 4.0.0 is not compatible with this rails version
-#end
+group :development do
+  gem 'capistrano',         require: false
+  gem 'capistrano-rvm',     require: false
+  gem 'capistrano-rails',   require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano3-puma',   require: false
+end
 
 group :production, :postgresql do
   gem 'pg'
