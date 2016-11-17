@@ -7,7 +7,6 @@ gem 'rake'
 gem 'rack'
 
 group :development, :test do
-  gem 'sqlite3'
   gem 'minitest'
   gem 'thor'
   gem 'faker'
@@ -27,6 +26,8 @@ end
 group :production, :postgresql do
   gem 'pg'
 end
+
+gem 'sqlite3'
 
 # classic gems
 gem 'sass-rails', '~> 4.0.5'
