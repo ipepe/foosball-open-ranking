@@ -5,6 +5,9 @@ class PlayersController < ApplicationController
   # GET /players.json
   def index
     @players = Player.ordered_by_ranking
+    if params['with_inactive'] != 'true'
+      @players = @players.only_active
+    end
   end
 
   # GET /players/1
@@ -85,6 +88,8 @@ class PlayersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def player_params
-      params.require(:player).permit(:nickname, :user_id)
+      p = [:user_id]
+      p.push(:nickname) if @player.user_id.try(:blank?) || @player.user_id == current_user.id
+      params.require(:player).permit(*p)
     end
 end

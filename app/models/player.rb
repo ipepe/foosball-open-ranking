@@ -11,6 +11,10 @@ class Player < ActiveRecord::Base
 
   scope :top10, -> { Player.all }
 
+  scope :only_active, -> (for_period_days: 30) do
+    where(id: Match.where('created_at > :date', date: Date.today-for_period_days.days).map{|m| m.players.map(&:id)}.flatten)
+  end
+
   belongs_to :created_by, class_name: 'User'
 
   after_create do
@@ -40,10 +44,13 @@ class Player < ActiveRecord::Base
     self.user_id == user.id
   end
 
-  # slug
-  # def to_param
-  #   [id, nickname.parameterize].join("-")
-  # end
+  def nickname
+    if user_id.present?
+      user.player_name
+    else
+      super
+    end
+  end
 
   # http://www.tropiceuro.com/rankings.php
   def rank(match)

@@ -1,7 +1,12 @@
 .container-fluid
   h1 Listing players
-  div
+  .btn.btn-default
     = link_to new_player_path
       span.glyphicon.glyphicon-plus
       = I18n.t('links.player.new')
+  .btn.btn-default
+    - if params['with_inactive'] == 'true'
+      = link_to 'Aktywni gracze', players_path
+    - else
+      = link_to 'Nieaktywni gracze', players_path(params: { with_inactive: true })
   == render 'players/table'
