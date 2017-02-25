@@ -8,7 +8,7 @@ set :application,     'foos'
 set :user,            'webapp'
 
 # Don't change these unless you know what you're doing
-set :rbenv_ruby,      '2.3.1'
+set :rbenv_ruby,      '2.3.3'
 set :pty,             true
 set :use_sudo,        false
 set :stage,           :production
