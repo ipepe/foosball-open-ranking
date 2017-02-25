@@ -1,1 +1,1 @@
-server 'ipepesrv.cloudapp.net', port: 2222, roles: [:web, :app, :db], primary: true
+server 'localhost', port: 2300, roles: [:web, :app, :db], primary: true

@@ -1,1 +1,0 @@
-server 'localhost', port: 2222, roles: [:web, :app, :db], primary: true
