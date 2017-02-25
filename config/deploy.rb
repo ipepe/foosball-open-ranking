@@ -1,48 +1,33 @@
 # Change these
 set :repo_url,        'https://github.com/ipepe/foosball-open-ranking'
-set :application,     'foos'
 set :user,            'webapp'
-set :puma_threads,    [4, 16]
-set :puma_workers,    0
 
 # Don't change these unless you know what you're doing
-set :rbenv_ruby,      '2.3.1'
+set :rbenv_ruby,      '2.3.3'
+set :passenger_restart_with_touch, true
 set :pty,             true
 set :use_sudo,        false
 set :stage,           :production
 set :deploy_via,      :remote_cache
-set :deploy_to,       "/home/#{fetch(:user)}/apps/#{fetch(:application)}"
-set :puma_bind,       "unix://#{shared_path}/tmp/sockets/#{fetch(:application)}-puma.sock"
-set :puma_state,      "#{shared_path}/tmp/pids/puma.state"
-set :puma_pid,        "#{shared_path}/tmp/pids/puma.pid"
-set :puma_access_log, "#{release_path}/log/puma.error.log"
-set :puma_error_log,  "#{release_path}/log/puma.access.log"
+set :deploy_to,       "/home/webapp/webapp"
 set :ssh_options,     { forward_agent: true, user: fetch(:user), keys: %w(~/.ssh/id_rsa.pub) }
-set :puma_preload_app, true
-set :puma_worker_timeout, nil
-set :puma_init_active_record, true  # Change to false when not using ActiveRecord
-
-## Defaults:
-# set :scm,           :git
-# set :branch,        :master
-# set :format,        :pretty
-# set :log_level,     :debug
-# set :keep_releases, 5
 
 ## Linked Files & Directories (Default None):
-# set :linked_files, %w{config/database.yml}
-# set :linked_dirs,  %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+set :linked_files, %w{.env.production}
+set :linked_dirs,  %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle uploads}
 
-namespace :puma do
-  desc 'Create Directories for Puma Pids and Socket'
-  task :make_dirs do
-    on roles(:app) do
-      execute "mkdir #{shared_path}/tmp/sockets -p"
-      execute "mkdir #{shared_path}/tmp/pids -p"
+namespace :rbenv do
+  desc 'Install rbenv version of project if missing on server'
+  task :install_rbenv_if_missing do
+    on release_roles(fetch(:rbenv_roles)) do
+      unless test "[ -d #{fetch(:rbenv_ruby_dir)} ]"
+        execute :rbenv, 'install', fetch(:rbenv_ruby)
+        execute :rbenv, 'global', fetch(:rbenv_ruby)
+        execute :gem, 'install bundler'
+      end
     end
   end
-
-  before :start, :make_dirs
+  before :validate, :install_rbenv_if_missing
 end
 
 namespace :deploy do
@@ -57,27 +42,20 @@ namespace :deploy do
     end
   end
 
-  desc 'Initial Deploy'
-  task :initial do
-    on roles(:app) do
-      before 'deploy:restart', 'puma:start'
-      invoke 'deploy'
+  task :create_non_existant_linked_files do
+    on release_roles(fetch(:rbenv_roles)) do
+      fetch(:linked_files).each do |file|
+        unless test "[ -f #{file} ]"
+          execute :touch, shared_path.join(file)
+        end
+      end
     end
   end
 
-  desc 'Restart application'
-  task :restart do
-    on roles(:app), in: :sequence, wait: 5 do
-      invoke 'puma:restart'
-    end
-  end
 
+  before 'check:linked_files', :create_non_existant_linked_files
   before :starting,     :check_revision
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
   after  :finishing,    :restart
 end
-
-# ps aux | grep puma    # Get puma pid
-# kill -s SIGUSR2 pid   # Restart puma
-# kill -s SIGTERM pid   # Stop puma

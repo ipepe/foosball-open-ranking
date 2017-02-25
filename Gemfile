@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.3.1'
+ruby '2.3.3'
 
 gem 'rails', '4.2.7.1'
 gem 'rake'
@@ -13,6 +13,7 @@ group :development, :test do
   gem "better_errors"
   gem 'binding_of_caller'
   gem 'pry'
+  gem 'sqlite3'
 end
 
 group :development do
@@ -20,14 +21,12 @@ group :development do
   gem 'capistrano-rbenv',     require: false
   gem 'capistrano-rails',   require: false
   gem 'capistrano-bundler', require: false
-  gem 'capistrano3-puma',   require: false
+  gem 'capistrano-passenger',   require: false
 end
 
 group :production, :postgresql do
   gem 'pg'
 end
-
-gem 'sqlite3'
 
 # classic gems
 gem 'sass-rails', '~> 4.0.5'
