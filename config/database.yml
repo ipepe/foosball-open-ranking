@@ -11,9 +11,9 @@ production:
   timeout:  5000
   encoding: utf8
   adapter:  postgresql
-  database: webapp
-  username: webapp
-  password: Password1
+  database: <%= ENV['DB_NAME'] %>
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
   host:     localhost
   port:     5432
 
