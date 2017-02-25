@@ -13,7 +13,7 @@ set :deploy_to,       "/home/webapp/webapp"
 set :ssh_options,     { forward_agent: true, user: fetch(:user), keys: %w(~/.ssh/id_rsa.pub) }
 
 ## Linked Files & Directories (Default None):
-set :linked_files, %w{.env.production}
+set :linked_files, %w{.env.production config/data.yml}
 set :linked_dirs,  %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle uploads}
 
 namespace :rbenv do
