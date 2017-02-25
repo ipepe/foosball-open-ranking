@@ -9,6 +9,7 @@ set :user,            'webapp'
 
 # Don't change these unless you know what you're doing
 set :rbenv_ruby,      '2.3.3'
+set :passenger_restart_with_touch, true
 set :pty,             true
 set :use_sudo,        false
 set :stage,           :production
@@ -16,13 +17,6 @@ set :deploy_via,      :remote_cache
 set :deploy_to,       "/home/#{fetch(:user)}/webapp"
 # set :deploy_to,       "/home/#{fetch(:user)}/apps/#{fetch(:application)}"
 set :ssh_options,     { forward_agent: true, user: fetch(:user), keys: %w(~/.ssh/id_rsa.pub) }
-
-## Defaults:
-# set :scm,           :git
-# set :branch,        :master
-# set :format,        :pretty
-# set :log_level,     :debug
-# set :keep_releases, 5
 
 ## Linked Files & Directories (Default None):
 # set :linked_files, %w{config/database.yml}
