@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   #before_action :authenticate_user!
 
-  unless Rails.env.development?
+  unless Rails.env.development? && false
     before_action :authenticate_user!
   else
     def current_user

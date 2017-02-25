@@ -264,3 +264,17 @@ Devise.setup do |config|
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
 end
+
+module OmniAuth
+  module Strategy
+    def full_host
+      uri = URI.parse(request.url)
+      uri.path = ''
+      uri.query = nil
+      if [443, 80, 0].include?(uri.port.to_i)
+        uri.port = nil
+      end
+      uri.to_s
+    end
+  end
+end
