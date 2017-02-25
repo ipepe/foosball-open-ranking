@@ -7,10 +7,10 @@ test: &test
   database: db/<%= Rails.env %>.sqlite3
 
 production:
-  pool: 50
-  timeout: 5000
+  pool:     50
+  timeout:  5000
   encoding: utf8
-  adapter: postgresql
+  adapter:  postgresql
   database: webapp
   username: webapp
   password: Password1
