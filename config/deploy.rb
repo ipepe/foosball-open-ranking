@@ -1,10 +1,5 @@
-# Commands
-# deploy:initial
-# deploy
-
 # Change these
 set :repo_url,        'https://github.com/ipepe/foosball-open-ranking'
-set :application,     'foos'
 set :user,            'webapp'
 
 # Don't change these unless you know what you're doing
@@ -14,13 +9,12 @@ set :pty,             true
 set :use_sudo,        false
 set :stage,           :production
 set :deploy_via,      :remote_cache
-set :deploy_to,       "/home/#{fetch(:user)}/webapp"
-# set :deploy_to,       "/home/#{fetch(:user)}/apps/#{fetch(:application)}"
+set :deploy_to,       "/home/webapp/webapp"
 set :ssh_options,     { forward_agent: true, user: fetch(:user), keys: %w(~/.ssh/id_rsa.pub) }
 
 ## Linked Files & Directories (Default None):
-# set :linked_files, %w{config/database.yml}
-# set :linked_dirs,  %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+set :linked_files, %w{.env.production}
+set :linked_dirs,  %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle uploads}
 
 namespace :rbenv do
   desc 'Install rbenv version of project if missing on server'
@@ -48,14 +42,18 @@ namespace :deploy do
     end
   end
 
-  desc 'Initial Deploy'
-  task :initial do
-    on roles(:app) do
-      before 'deploy:restart', 'puma:start'
-      invoke 'deploy'
+  task :create_non_existant_linked_files do
+    on release_roles(fetch(:rbenv_roles)) do
+      fetch(:linked_files).each do |file|
+        unless test "[ -f #{file} ]"
+          execute :touch, shared_path.join(file)
+        end
+      end
     end
   end
 
+
+  before 'check:linked_files', :create_non_existant_linked_files
   before :starting,     :check_revision
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
