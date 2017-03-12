@@ -1,13 +1,11 @@
 .container-fluid
   p Date: #{@match.date}
-  table.table.table-responsive
-    colgroup
-      col style="background-color:#c0392b;"
-      col style="background-color:#2980b9;"
+  p Ranked?: #{@match.can_be_ranked?}
+  table.table.table-responsive.table-bordered
     thead
       tr
-        th = I18n.t('activerecord.attributes.match.red_team')
-        th = I18n.t('activerecord.attributes.match.blue_team')
+        th style="background-color:#c0392b;" = I18n.t('activerecord.attributes.match.red_team')
+        th style="background-color:#2980b9;" = I18n.t('activerecord.attributes.match.blue_team')
     tbody
       tr
         td = @match.red_team_player_one.nickname
@@ -23,6 +21,6 @@ br
     = link_to 'Confirm!', { :action=>"update", :controller=>"matches",
             :id=>@match.id, match:{ confirmed_by_id: 1 } }, method: :put
     '|
-  = link_to 'Edit', edit_match_path(@match)
+  = link_to 'Edit', edit_match_path(@match), class: 'btn'
   '|
-  = link_to 'Back', matches_path
+  = link_to 'Back', matches_path, class: 'btn'

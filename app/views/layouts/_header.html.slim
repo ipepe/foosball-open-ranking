@@ -1,37 +1,43 @@
-nav.navbar.navbar-inverse
+nav.navbar.navbar-inverse.border-radius-0
   .container-fluid
     .navbar-header
+      button.navbar-toggle.collapsed data-target="#bs-example-navbar-collapse-2" data-toggle="collapse" type="button"
+        span.sr-only Toggle navigation
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
       = link_to root_path, class:"navbar-brand"
         .inline
           img src="/icon.png"
           .inline Foosball Open Ranking
     - if current_user.present?
-      ul.nav.navbar-nav
-        li
-          = link_to players_path
-            span.glyphicon.glyphicon-user
-            = I18n.t('links.player.index')
-        li
-          = link_to matches_path
-            span.glyphicon.glyphicon-inbox
-            = I18n.t('links.match.index')
-        li
-          = link_to new_match_path
-            span.glyphicon.glyphicon-plus
-            span.glyphicon.glyphicon-inbox
-            = I18n.t('links.match.new')
-    ul.nav.navbar-nav.navbar-right
-      li
-        a href="https://github.com/ipepe/foosball-open-ranking"
-          span.glyphicon.glyphicon-tags
-          | GitHub.com
-      - if current_user.present?
-        li
-          = link_to destroy_user_session_path
-            span.glyphicon.glyphicon-log-out
-            = I18n.t('links.devise.logout') + ' ' + current_user.label
-      - else
-        li
-          = link_to new_user_session_path
-            span.glyphicon.glyphicon-log-in
-            = I18n.t('links.devise.login')
+      #bs-example-navbar-collapse-2.collapse.navbar-collapse
+        ul.nav.navbar-nav
+          li
+            = link_to players_path
+              span.glyphicon.glyphicon-user
+              = I18n.t('links.player.index')
+          li
+            = link_to matches_path
+              span.glyphicon.glyphicon-inbox
+              = I18n.t('links.match.index')
+          li
+            = link_to new_match_path
+              span.glyphicon.glyphicon-plus
+              span.glyphicon.glyphicon-inbox
+              = I18n.t('links.match.new')
+        ul.nav.navbar-nav.navbar-right
+          li
+            a href="https://github.com/ipepe/foosball-open-ranking"
+              span.glyphicon.glyphicon-tags
+              | GitHub.com
+          - if current_user.present?
+            li
+              = link_to destroy_user_session_path
+                span.glyphicon.glyphicon-log-out
+                = I18n.t('links.devise.logout') + ' ' + current_user.label
+          - else
+            li
+              = link_to new_user_session_path
+                span.glyphicon.glyphicon-log-in
+                = I18n.t('links.devise.login')

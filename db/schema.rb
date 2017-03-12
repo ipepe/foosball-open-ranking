@@ -13,7 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20160307150730) do
 
-  create_table "matches", force: true do |t|
+  create_table "matches", force: :cascade do |t|
     t.integer  "red_team_score",          default: 0,     null: false
     t.integer  "blue_team_score",         default: 0,     null: false
     t.integer  "created_by_id",                           null: false
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20160307150730) do
     t.boolean  "already_ranked",          default: false, null: false
   end
 
-  create_table "player_rating_changes", force: true do |t|
+  create_table "player_rating_changes", force: :cascade do |t|
     t.integer  "player_id",                null: false
     t.integer  "match_id",                 null: false
     t.integer  "rating_points_difference", null: false
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 20160307150730) do
     t.datetime "updated_at",               null: false
   end
 
-  create_table "players", force: true do |t|
+  create_table "players", force: :cascade do |t|
     t.string   "nickname",                     null: false
     t.integer  "rating_points", default: 1500, null: false
     t.integer  "user_id"
@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 20160307150730) do
     t.datetime "updated_at",                   null: false
   end
 
-  create_table "users", force: true do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"

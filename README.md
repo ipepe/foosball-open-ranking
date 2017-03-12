@@ -8,31 +8,10 @@ Website is hosted here:
 <SOON>
 
 
-# openshift repo location
-
-```bash
-git remote add os ssh://56cece0b7628e14d28000107@foos-ipepe.rhcloud.com/~/git/foos.git/
-```
-
-## List envs 
-```bash
-rhc env list -a foos
-```
-
-## Add env
-```
-rhc env set GOOGLE_SECRET_KEY=testkey -a foos
-```
-
-## SSH server
-```
-ssh 56cece0b7628e14d28000107@foos-ipepe.rhcloud.com
-```
-
 # Kopiowanie backupu
 
 ```
-scp 56cece0b7628e14d28000107@foos-ipepe.rhcloud.com:/var/lib/openshift/56cece0b7628e14d28000107/app-root/repo/db/data.yml ~/foosball_db_backup_tmp.yml
+scp 56cece0b7628e14d28000107@foos-ipepe.rhcloud.com:/var/lib/openshift/56cece0b7628e14d28000107/app-root/repo/db/data.yml ~/foosball_db_backup_2017-03-12.yml
 ```
 
 # Reset rankingu
@@ -40,6 +19,3 @@ scp 56cece0b7628e14d28000107@foos-ipepe.rhcloud.com:/var/lib/openshift/56cece0b7
 ```
 RAILS_ENV=production bundle exec rake players:rerank
 ```
-
-## Server needs changes for deployment
-1

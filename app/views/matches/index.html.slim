@@ -1,7 +1,4 @@
 .container-fluid
   h1 Listing matches
-  div
-    = link_to new_match_path
-      span.glyphicon.glyphicon-plus
-      = I18n.t('links.match.new')
+  = link_to I18n.t('links.match.new'), new_match_path, class: 'btn'
   == render 'matches/table'

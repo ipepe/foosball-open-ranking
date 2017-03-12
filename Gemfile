@@ -42,7 +42,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 # assets pipeline
 source 'https://rails-assets.org' do
   gem 'rails-assets-jquery', '< 3.0.0'
-  gem 'rails-assets-bootstrap-sass-official'
+  gem 'rails-assets-bootswatch-sass'
   gem 'rails-assets-bootstrap-datepicker'
   gem 'rails-assets-d3', '< 3.6.0'
 end

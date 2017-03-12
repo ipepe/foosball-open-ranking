@@ -1,19 +1,16 @@
 table.table.table-responsive
   thead
     tr
-      th = I18n.t('activerecord.attributes.match.date')
       th = I18n.t('activerecord.attributes.match.red_team_nicknames')
       th style="text-align: center;"
         = "#{I18n.t('activerecord.attributes.match.red_team_score')}:#{I18n.t('activerecord.attributes.match.blue_team_score')}"
       th = I18n.t('activerecord.attributes.match.blue_team_nicknames')
-      th = I18n.t('activerecord.attributes.match.ranked')
-      th = I18n.t('activerecord.attributes.match.confirm')
+      th.hidden-xs = I18n.t('activerecord.attributes.match.ranked')
+      th.hidden-xs = I18n.t('activerecord.attributes.match.confirm')
 
   tbody
     - @matches.each do |match|
-      tr
-        td
-          a(href="/matches/#{match.id}") = match.date.to_s
+      tr data-href=match_path(match)
         td style="color: #c0392b;"
           - match.red_team_players.each do |player|
             span = "#{player.nickname} #{match.rating_points_difference_for(player)}"
@@ -26,8 +23,8 @@ table.table.table-responsive
           - match.blue_team_players.each do |player|
             span = "#{player.nickname} #{match.rating_points_difference_for(player)}"
             br
-        td = match.can_be_ranked?
-        td
+        td.hidden-xs = match.can_be_ranked?
+        td.hidden-xs
           - if match.can_be_confirmed?(current_user)
             = link_to 'Confirm!', { :action=>"update", :controller=>"matches",
                     :id=>match.id, match:{ confirmed_by_id: current_user.id } }, method: :put

@@ -18,3 +18,9 @@
 //= require bootstrap-datepicker
 //= require 'd3'
 //= require_tree .
+
+jQuery(function($) {
+    $("tr[data-href]").click(function() {
+        window.location = $(this).data('href');
+    });
+});

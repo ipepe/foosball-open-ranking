@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   end
 
   def player_name
-    "#{first_name} #{last_name.first}."
+    "#{first_name} #{last_name.split('').take(3).join('')}."
   end
 
   def self.from_omniauth(auth)

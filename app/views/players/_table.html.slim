@@ -1,23 +1,18 @@
 table.table.table-responsive
   thead
     tr
-      th = I18n.t('activerecord.attributes.player.ranking_place')
-
-      th = I18n.t('activerecord.attributes.player.nickname')
       th = I18n.t('activerecord.attributes.player.rating_points')
-      th = I18n.t('activerecord.attributes.player_rating_change.rating_points_difference')
-      th = I18n.t('activerecord.attributes.user.email')
+      th = I18n.t('activerecord.attributes.player.nickname')
+      th.hidden-xs = I18n.t('activerecord.attributes.user.email')
       - unless @table_without_actions
         th = I18n.t('activerecord.attributes.player.attach')
         th = I18n.t('activerecord.attributes.player.dettach')
   tbody
     - @players.each_with_index do |player, i|
       tr
-        td = i+1
-        td = link_to player.nickname, player_path(player)
         td = player.rating_points
-        td = player.player_rating_changes.last.try(:formatted_rating_points_difference)
-        td
+        td = link_to player.nickname, player_path(player)
+        td.hidden-xs
           - if player.user.present?
             = link_to player.user.try(:email), user_path(player.user)
         - unless @table_without_actions
@@ -32,18 +27,16 @@ table.table.table-responsive
   - unless @table_without_actions
     tfoot
       tr
-        th Players count
+        th AVG:
         th
-        th
-        th Players average rating points
-        th
-        th
-        th
+        th.hidden-xs
+        - unless @table_without_actions
+          th
+          th
       tr
-        td = Player.all.count
-        td
-        td
         td = Player.all.sum(:rating_points)/Player.all.count
         td
-        td
-        td
+        td.hidden-xs
+        - unless @table_without_actions
+          td
+          td

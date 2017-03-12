@@ -15,12 +15,7 @@
  *= require 'bootstrap-datepicker'
  *= require_self
  */
-@import "bootstrap-sass-official";
-@font-face {
-  font-family: 'Glyphicons Halflings';
-  src: url('/assets/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.eot');
-  src: url('/assets/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('/assets/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.woff') format('woff'), url('/assets/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.ttf') format('truetype'), url('/assets/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
-}
+@import "bootswatch-sass/lumen/bootstrap.scss";
 
 .navbar{
   border-radius: 0px;
@@ -59,4 +54,18 @@ body, .container, .container-fluid{
   fill: none;
   stroke: steelblue;
   stroke-width: 1.5px;
+}
+
+.clickable:hover{
+  background-color: #f5f5f5;
+}
+.clickable{
+  cursor: pointer !important;
+  .expanding-link{
+    color: inherit;
+  }
+}
+
+tr[data-href]{
+  @extend .clickable
 }

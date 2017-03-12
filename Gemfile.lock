@@ -177,8 +177,10 @@ GEM
       sprockets-rails
     rails-assets-bootstrap-datepicker (1.6.4)
       rails-assets-jquery (>= 1.7.1)
-    rails-assets-bootstrap-sass-official (3.3.7)
-      rails-assets-jquery (>= 1.9.1, < 4)
+    rails-assets-bootstrap-sass-official (3.2.0.2)
+      rails-assets-jquery (>= 1.9.0)
+    rails-assets-bootswatch-sass (3.3.1)
+      rails-assets-bootstrap-sass-official (~> 3.2.0)
     rails-assets-d3 (3.5.17)
     rails-assets-jquery (2.2.4)
     rails-deprecated_sanitizer (1.0.3)
@@ -279,7 +281,7 @@ DEPENDENCIES
   rack
   rails (= 4.2.7.1)
   rails-assets-bootstrap-datepicker!
-  rails-assets-bootstrap-sass-official!
+  rails-assets-bootswatch-sass!
   rails-assets-d3 (< 3.6.0)!
   rails-assets-jquery (< 3.0.0)!
   rake

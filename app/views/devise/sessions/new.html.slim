@@ -1,5 +1,5 @@
-center
-  h1 = I18n.t('links.devise.login')
-  - resource_class.omniauth_providers.each do |provider|
-    = link_to omniauth_authorize_path(resource_name, provider)
-      img src="/sign-in-with-google.png"
+.row
+  .col-md-6.col-md-offset-3 align='center'
+    - resource_class.omniauth_providers.each do |provider|
+      = link_to "Sign in with #{OmniAuth::Utils.camelize(provider)}",
+              omniauth_authorize_path(resource_name, provider), class: 'btn btn-primary'

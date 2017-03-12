@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root 'main#index'
+  root 'players#index'
 
   devise_for :users, :controllers => { :omniauth_callbacks => "callbacks" }
 
