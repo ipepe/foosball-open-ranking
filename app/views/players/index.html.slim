@@ -2,9 +2,10 @@
   .row: col-md-12
     h3 Listing players
     = link_to I18n.t('links.player.new'), new_player_path, class: 'btn'
-    .btn.btn-default
+    = link_to I18n.t('links.match.new'), new_match_path, class: 'btn'
+    .btn.btn-default.hidden-xs
       - if params['with_inactive'] == 'true'
-        = link_to 'Aktywni gracze', players_path
+        = link_to 'Active players', players_path
       - else
-        = link_to 'Nieaktywni gracze', players_path(params: { with_inactive: true })
+        = link_to 'Inactive players', players_path(params: { with_inactive: true })
     == render 'players/table'
