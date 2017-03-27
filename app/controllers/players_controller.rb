@@ -5,7 +5,7 @@ class PlayersController < ApplicationController
   # GET /players.json
   def index
     @players = Player.ordered_by_ranking
-    if params['with_inactive'] != 'true'
+    if params['with_inactive'] != 'true' && !ENV['DEMO_MODE']
       @players = @players.only_active
     end
   end

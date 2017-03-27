@@ -67,7 +67,7 @@ gem 'devise'
 gem 'omniauth'
 gem "omniauth-google-oauth2"
 
-
+gem 'faker'
 gem 'yaml_db'
 #rake db:data:dump   ->   Dump contents of Rails database to db/data.yml
 #rake db:data:load   ->   Load contents of db/data.yml into the database

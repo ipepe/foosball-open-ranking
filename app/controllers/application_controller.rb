@@ -5,14 +5,11 @@ class ApplicationController < ActionController::Base
 
   #before_action :authenticate_user!
 
-  unless Rails.env.development?
-    before_action :authenticate_user!
-  else
+  if Rails.env.development? || ENV['DEMO_MODE']
     def current_user
-      User.find_or_create_by!(email: 'patryk.ptasinski@in4mates.com') do |user|
-        user.first_name= 'Dev'
-        user.last_name = 'Eloper'
-      end
+      User.first
     end
+  else
+    before_action :authenticate_user!
   end
 end
